@@ -8,14 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-        $(function(){
-            $('#login').click(function(){
-                $(this).next('#login-content').slideToggle();
-                $(this).toggleClass('active');
-            });
-        });
-    </script>
+    <script type="text/javascript" src="includes/togglelogin.js"></script>
     <link rel="icon" type="image/png" href="img/icon.png" />
 
 </head>
@@ -27,7 +20,6 @@
 <!--Cierre del encabezado-->
 
     <!--Primera vista-->
-
     <div class="container-fluid" style="padding-top: 127px">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -42,7 +34,6 @@
         </div>
     </div>
     </div>
-
     <!--Cierre de la primera vista-->
     
     <!--Segunda Vista-->
@@ -192,6 +183,6 @@
     <?php include('includes/footer.php'); ?>
     </div>
     <!--Cierre del Footer-->
-
+    <script src="js/valida_login.js"></script>
 </body>
 </html>

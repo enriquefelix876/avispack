@@ -4,13 +4,12 @@
             <img src="img/logo2.png" alt="app">
             <ul>
                 <li>
-                    <a id="login" href="#" >Login</a>
+                    <a id="login" href="#" >Acceder</a>
                         <div id="login-content">
                         <form>
-                            <input type="email" id="user" name="Email" placeholder="Usuario">
+                            <input type="text" id="user" name="User" placeholder="Usuario">
                             <input type="password" id="pass" name="Password" placeholder="Contraseña">
                             <input type="submit" id="submit" value="Login">
-                            <label><input type="checkbox" checked="checked">Recuérdame</label>
                         </form>
                     </div>
                 </li>
