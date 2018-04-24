@@ -6,13 +6,18 @@ if(!empty($_POST)){
 			include "conexion.php";
 			
 			$user_id=null;
-			$sql1= "select * from user where (username=\"$_POST[username]\" or email=\"$_POST[username]\") and password=\"$_POST[password]\" ";
+			$sql1= "select * from user where (username=\"$_POST[username]\" or email=\"$_POST[username]\") ";
 			$query = $con->query($sql1);
 			while ($r=$query->fetch_array()) {
 				$user_id=$r["id"];
 				break;
 			}
-			if($user_id==null){
+
+			//Se verifica si el hash coincide
+			$hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+			$correcto = password_verify($_POST["password"], $hash);
+
+			if($user_id==null || !$correcto){
 				print "<script>alert(\"Acceso invalido.\");window.location='../login.php';</script>";
 			}else{
 				session_start();
@@ -22,5 +27,4 @@ if(!empty($_POST)){
 		}
 	}
 }
-
 ?>

@@ -20,7 +20,7 @@
             <a href=""><img src="img/logo2.png" alt="app"></a>
         </div>
         <div class="col sm-6 text-right" style="padding-top:45px">
-            <a href="./php/logout.php">SALIR</a>
+            <a href="./php/logout.php"><button type="button" class="btn btn-light">Salir</button></a>
         </div>
         </div>
     <?php endif;?>
