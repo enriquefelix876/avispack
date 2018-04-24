@@ -6,19 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Avispack: Pedidos a domicilio</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+        $(function(){
+            $('#login').click(function(){
+                $(this).next('#login-content').slideToggle();
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
     <link rel="icon" type="image/png" href="img/icon.png" />
+
 </head>
 <body>
 
-    <!--Encabezado-->
-    <header style="background: rgba(0,0,0,0.9); width: 100%; position: fixed; z-index: 10;">
-        <section style="width: 80%; margin: auto; overflow:hidden">
-            <nav>
-                <img src="img/logo2.png" alt="app">
-            </nav>
-        </section>
-    </header>
-    <!--Cierre del encabezado-->
+<!--Encabezado-->
+<?php include('includes/header.php'); ?>
+
+<!--Cierre del encabezado-->
 
     <!--Primera vista-->
 
@@ -54,7 +60,7 @@
                 <img src="img/separador2.png" alt="separador">
                 <ul style="font-family: 'Open Sans', sans-serif; font-size: 17px; color: #434343;">
                     <li class="p-2">Seguridad, tus pedidos llegarán en buen estado a su destino siempre.</li>
-                    <li class="p-2">Disponibilidad, contamos con horarios de servicio de 8AM a 11PM</li>
+                    <li class="p-2">Disponibilidad, contamos con horarios de servicio de 9AM a 12AM</li>
                     <li class="p-2">Accesibilidad, Contamos con las tarifas mas accesibles del mercado, adaptadas para 
                         ofrecer mejor satisfacción a cada tipo de Cliente.
                     </li>
@@ -70,7 +76,7 @@
                 <p style="font-family: 'Open Sans', sans-serif; font-size: 40px; letter-spacing: -1px;
                 color: #434343;">Clientes Satisfechos</p>
                 <img src="img/separador.png" alt="separador">
-                <img class="p-3 text-center" src="img/clientes.jpg" alt="">       
+                <img class="p-3 text-center" src="img/rosca.jpeg" alt="">       
             
             <blockquote class="pull-right">
                 <p>Uso Avispack cada vez que me da flojera salir de casa.</p>
@@ -182,19 +188,9 @@
     <!--Cierre de la descarga de la App-->
 
     <!--Footer-->
-    <footer class="bg-dark text-white">
-        <div class="col-md-10 d-block mx-auto">
-            <a href="https://m.facebook.com/soyenriquefelix" target="_blank"><img src="img/facebook.png" alt="" class="p-2"></a>
-            <a href="https://twitter.com/soyenriquefelix" target="_blank"><img src="img/twitter.png" alt="" class="p-2"></a>    
-            <a href="mailto:enriquefelix876@gmail.com"><img src="img/gmail.png" alt="" class="p-2"></a>
-            <a href="https://www.youtube.com/channel/UCHCcImgeCBgYjakoPvq-r_Q" target="_blank"><img src="img/youtube.png" alt="" class="p-2"></a>
-            <a href="https://www.instagram.com/enrique.fe/" target="_blank"><img src="img/instagram.png" alt="" class="p-2"></a>
-            <div>
-                <p class="small">Instituto Tecnológico de Sonora 5 de Febrero 818 Sur, Col. Centro, Ciudad Obregón, Sonora, 
-                    México.</p>
-            </div>
-         </div>
-    </footer>
+    <div style="clear: both;"></div>
+    <?php include('includes/footer.php'); ?>
+    </div>
     <!--Cierre del Footer-->
 
 </body>
