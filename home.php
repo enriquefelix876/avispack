@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null){
-	print "<script>alert(\"Acceso invalido!\");window.location='login.php';</script>";
+    print "<script>alert(\"Acceso invalido!\");window.location='index.php';</script>";
 }
 
 ?>
@@ -24,7 +24,7 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null){
 </header>
 <!--Cierre del header-->
 
-<h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h1>
+<h1>Te has logueado Correctamente</h1>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur molestias pariatur rem iste dolore labore, 
     culpa explicabo unde commodi assumenda numquam omnis soluta repellat ratione. Soluta suscipit autem error 

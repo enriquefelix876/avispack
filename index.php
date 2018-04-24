@@ -177,12 +177,11 @@
         </div>
     </div>
     <!--Cierre de la descarga de la App-->
-
+    <script src="js/valida_login.js"></script>
     <!--Footer-->
     <div style="clear: both;"></div>
     <?php include('includes/footer.php'); ?>
     </div>
     <!--Cierre del Footer-->
-    <script src="js/valida_login.js"></script>
 </body>
 </html>
