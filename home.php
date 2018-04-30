@@ -14,21 +14,16 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null){
     <title>Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="img/icon.png" />
+    <link rel="icon" type="image/png" href="img/icon.png"/>
 </head>
 <body>
 
-<!--Comienzo del header-->
-<header style="background: rgba(0,0,0,0.9);">
-    <a href="index.php"><img src="img/logo2.png" alt="app"></a>
-</header>
-<!--Cierre del header-->
+<!--Encabezado-->
+<?php include('includes/header.php'); ?>
 
-<h1>Te has logueado Correctamente</h1>
+<!--Cierre del encabezado-->
 
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur molestias pariatur rem iste dolore labore, 
-    culpa explicabo unde commodi assumenda numquam omnis soluta repellat ratione. Soluta suscipit autem error 
-    dolorum.</p>
+<?php include('./includes/info_user.php'); ?>
 
 <!--Footer-->
 <div style="clear: both;"></div>

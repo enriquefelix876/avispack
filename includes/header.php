@@ -5,7 +5,7 @@
     <?php if(!isset($_SESSION["user_id"])):?>
         <div class="row">
         <div class="col sm-6">
-            <a href=""><img src="img/logo2.png" alt="app"></a>
+            <a href="index.php"><img src="img/logo2.png" alt="app"></a>
         </div>
         <div class="col sm-6 text-right" style="padding-top:45px">
             <a href="login.php"><button type="button" class="btn btn-light">Acceder</button></a>
@@ -17,7 +17,7 @@
     <?php else:?>
     <div class="row">
         <div class="col sm-6">
-            <a href=""><img src="img/logo2.png" alt="app"></a>
+            <a href="home.php"><img src="img/logo2.png" alt="app"></a>
         </div>
         <div class="col sm-6 text-right" style="padding-top:45px">
             <a href="./php/logout.php"><button type="button" class="btn btn-light">Salir</button></a>

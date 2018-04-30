@@ -20,6 +20,8 @@ session_start();
 <!--Encabezado-->
 <?php include('includes/header.php'); ?>
 
+<span class="fa fa-down fa-wp-dark center-text scroll-arrow" aria-hidden="true" style="font-size:28px;"></span>
+
 <!--Cierre del encabezado-->
 
     <!--Primera vista-->

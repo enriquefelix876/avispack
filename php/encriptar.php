@@ -9,23 +9,13 @@
 <body>
 <?php
 
-    $opciones = [
-        'cost' => 8,
-    ];
+ 
+    $hash = password_hash("nose", PASSWORD_DEFAULT);
 
-    $hash = password_hash("roscavela", PASSWORD_BCRYPT, $opciones);
-    $hash2 = password_hash("roscavela", PASSWORD_BCRYPT, $opciones);
-    
     echo $hash;
     echo "<br>";
-    echo $hash2;
-    echo "<br>";
 
-    if (password_verify('roscavel', $hash)) {
-        echo '¡La contraseña es válida!';
-    } else {
-        echo 'La contraseña no es válida.';
-    }
+    echo password_verify('nose', $hash);
 ?>
 </body>
 </html>
