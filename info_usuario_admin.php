@@ -54,7 +54,7 @@ $query = $con->query($sql);
                 <p class="h5 p-2"><?php echo $nombreCompleto?></p>
             </div>
             <div class="row">
-                <button style="width:150px" type="button" class="btn btn-success">Modificar Usuario</button>
+                <a href="editar_usuario_admin.php?id=<?php echo $_GET["id"]?>"><button style="width:150px" type="button" class="btn btn-success">Modificar Usuario</button></a>
             </div>
             <div class="row" style="padding-top:15px">
                 <a href="eliminar_usuario_admin.php?id=<?php echo $_GET["id"]?>"><button style="width:150px" type="button" class="btn btn-danger">Eliminar Usuario</button></a>
