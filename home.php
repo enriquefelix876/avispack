@@ -25,11 +25,11 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null){
 
 <?php include('./includes/info_user.php'); ?>
 
-<!--Footer-->
+<!--Footer
 <div style="clear: both;"></div>
     <?php include('includes/footer.php'); ?>
 </div>
-<!--Cierre del Footer-->
+Cierre del Footer-->
 
 </section>
 </body>

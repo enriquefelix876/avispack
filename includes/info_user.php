@@ -14,23 +14,9 @@ switch ($_SESSION["user_rol"]) {
         break;
 
     case "Miembro":
-    echo "Te has logeado como Miembro Normal: ";
-    echo "<br>";
-    echo $_SESSION["user_id"];
-    echo "<br>";
-    echo $_SESSION["user_fullname"];
-    echo "<br>";    
-    echo $_SESSION["user_username"];
-    echo "<br>";
-    echo $_SESSION["user_email"];
-    echo "<br>";
-    echo $_SESSION["user_password"];
-    echo "<br>";
-    echo $_SESSION["user_rol"];
-    echo "<br>";
-    echo $_SESSION["user_phonenumber"];
-    echo "<br>";
-    echo $_SESSION["user_created_at"];
+
+        include('member_page.php');
+
         break;
 
     case "Repartidor":
