@@ -2,7 +2,6 @@
 
 include "conexion.php";
 			
-// sql to delete a record
 $sql = "delete from user where id = \"$_GET[id]\"";
 
 if ($con->query($sql) === TRUE) {

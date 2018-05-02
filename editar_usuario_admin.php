@@ -20,6 +20,7 @@ while($datos=$query->fetch_array()){
     $rol = $datos["rol"];
     $numeroTelefono = $datos["phonenumber"];
     $fechaRegistro = $datos["created_at"];
+
 }
 ?>
 
@@ -47,42 +48,43 @@ while($datos=$query->fetch_array()){
         </div>
 
         <div class="row">
+
             <div class="col-6">
             <p class="h2"><?php echo $nombreCompleto?></p>
-
+            
                 <!--Formulario-->
-                <form action="">
+                <form role="form" name="login" action="php/edit_user.php?id=<?php echo $id?>" method="post">
                     <div class="form-group">
                         <div class="input-group mb-3" style="padding-top:20px">
                             <div class="input-group-prepend">
-                                <span style="width:180px" class="input-group-text" id="inputGroup-sizing-default">Nombre Completo</span>
+                                <span style="width:180px" class="input-group-text">Nombre Completo</span>
                             </div>
-                            <input type="text" value="<?php echo $nombreCompleto?>" class="form-control" 
+                                <input type="text" value="<?php echo $nombreCompleto?>" class="form-control" id="fullname" name="fullname"
+                                aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span style="width:180px" class="input-group-text">Nombre de Usuario</span>
+                            </div>
+                                <input type="text" value="<?php echo $nombreUsuario?>" class="form-control" id="username" name="username"
+                                aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span style="width:180px" class="input-group-text">Correo Electronico</span>
+                            </div>
+                            <input type="text" value="<?php echo $email?>" class="form-control" id="email" name="email" 
                             aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span style="width:180px" class="input-group-text" id="inputGroup-sizing-default">Nombre de Usuario</span>
+                                <span style="width:180px" class="input-group-text">Telefono</span>
                             </div>
-                                <input type="text" value="<?php echo $nombreUsuario?>" class="form-control" aria-label="Default" 
-                                aria-describedby="inputGroup-sizing-default">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="width:180px" class="input-group-text" id="inputGroup-sizing-default">Correo Electronico</span>
-                            </div>
-                            <input type="text" value="<?php echo $email?>" class="form-control" aria-label="Default" 
-                            aria-describedby="inputGroup-sizing-default">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="width:180px" class="input-group-text" id="inputGroup-sizing-default">Telefono</span>
-                            </div>
-                            <input type="text" value="<?php echo $numeroTelefono?>" class="form-control" aria-label="Default" 
-                            aria-describedby="inputGroup-sizing-default">
+                            <input type="text" value="<?php echo $numeroTelefono?>" id="phonenumber" name="phonenumber" 
+                            class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
                         
                         <div class="input-group mb-3">
@@ -90,17 +92,18 @@ while($datos=$query->fetch_array()){
                                 <label style="width:180px" class="input-group-text" 
                                 for="inputGroupSelect01">Rol del Usuario</label>
                             </div>
-                            <select class="custom-select" id="inputGroupSelect01">
-                                <option value="1">Miembro</option>
-                                <option value="2">Repartidor</option>
-                                <option value="3">Administrador</option>
+                            <select class="custom-select" id="rol" name="rol">
+                                <option selected><?php  echo $rol?></option>
+                                <option value="Miembro">Miembro</option>
+                                <option value="Repartidor">Repartidor</option>
+                                <option value="Administrador">Administrador</option>
                             </select>
                             </div>
         
-                        <div class="text-right" style="padding-top:20px">
+                        <div class="" style="padding-top:20px">
                             <a href="./info_usuario_admin.php?id=<?php echo $_GET["id"]?>"><button type="button" 
                             class="btn btn-secondary">Regresar</button></a>
-                            <button style="text-align:right" type="button" class="btn btn-primary">Modificar</button>
+                            <button style="text-align:right" type="submit" class="btn btn-primary">Modificar</button>
                         </div>
 
                     </div>

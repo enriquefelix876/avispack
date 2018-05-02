@@ -49,6 +49,7 @@ $query = $con->query($sql);
             </div>
             <div class="row">
                 <img style="padding-top:20px" src="./img/user_man.png" alt="Imagen de Usuario">
+                
             </div>
             <div class="row">
                 <p class="h5 p-2"><?php echo $nombreCompleto?></p>
