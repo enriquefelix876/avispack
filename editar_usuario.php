@@ -3,7 +3,25 @@ session_start();
 if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user_id"] != $_GET["id"]){
     print "<script>alert(\"Acceso invalido!\");window.location='index.php';</script>";
 }
+
+include "php/conexion.php";
+$sql= "select * from user where id = \"$_SESSION[user_id]\"";
+$query = $con->query($sql);
+
+
+while($datos=$query->fetch_array()){
+    $id = $datos["id"];
+    $nombreCompleto = $datos["fullname"];
+    $nombreUsuario = $datos["username"];
+    $email = $datos["email"];
+    $rol = $datos["rol"];
+    $numeroTelefono = $datos["phonenumber"];
+    $fechaRegistro = $datos["created_at"];
+    $pass = $datos["password"];
+}
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +60,7 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user
                             <div class="input-group-prepend">
                                 <span style="width:180px" class="input-group-text">Nombre Completo</span>
                             </div>
-                                <input type="text" value="<?php echo $_SESSION["user_fullname"]?>" class="form-control" id="fullname" 
+                                <input type="text" value="<?php echo $nombreCompleto?>" class="form-control" id="fullname" 
                                 name="fullname"aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
 
@@ -50,7 +68,7 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user
                             <div class="input-group-prepend">
                                 <span style="width:180px" class="input-group-text">Nombre de Usuario</span>
                             </div>
-                                <input type="text" value="<?php echo $_SESSION["user_username"]?>" 
+                                <input type="text" value="<?php echo $nombreUsuario?>" 
                                 class="form-control" id="username" name="username"
                                 aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
@@ -59,7 +77,7 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user
                             <div class="input-group-prepend">
                                 <span style="width:180px" class="input-group-text">Correo Electronico</span>
                             </div>
-                            <input type="text" value="<?php echo $_SESSION["user_email"]?>" class="form-control" id="email" 
+                            <input type="text" value="<?php echo $email?>" class="form-control" id="email" 
                             name="email" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
 
@@ -67,7 +85,7 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user
                             <div class="input-group-prepend">
                                 <span style="width:180px" class="input-group-text">Telefono</span>
                             </div>
-                            <input type="text" value="<?php echo $_SESSION["user_phonenumber"]?>" id="phonenumber" name="phonenumber" 
+                            <input type="text" value="<?php echo $numeroTelefono?>" id="phonenumber" name="phonenumber" 
                             class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
 
@@ -75,7 +93,7 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user
                             <div class="input-group-prepend">
                                 <span style="width:180px" class="input-group-text">Contraseña</span>
                             </div>
-                            <input type="password" value="<?php echo $_SESSION["user_password"]?>" class="form-control"
+                            <input type="password" value="<?php echo $pass?>" class="form-control"
                             id="password" name="password" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
         
