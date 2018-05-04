@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-05-2018 a las 09:14:15
+-- Tiempo de generación: 04-05-2018 a las 07:58:45
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `direccion` (
   `id` int(11) NOT NULL,
-  `envio_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
   `address` varchar(80) NOT NULL,
   `lat` float(10,6) NOT NULL,
@@ -42,8 +42,8 @@ CREATE TABLE `direccion` (
 -- Volcado de datos para la tabla `direccion`
 --
 
-INSERT INTO `direccion` (`id`, `envio_id`, `name`, `address`, `lat`, `lng`, `type`) VALUES
-(1, 1, 'Prol Av Periferico 14B', 'Nacionalización del Golfo de California\r\n85477 Heroica Guaymas, Son.', 27.000000, 110.000000, 'domicilio');
+INSERT INTO `direccion` (`id`, `user_id`, `name`, `address`, `lat`, `lng`, `type`) VALUES
+(1, 2, 'Prol Av Periferico 14B', 'Nacionalizacion del Golfo de California\r\n85477 Heroica Guaymas, Son', 27.000000, 110.000000, 'domicilio');
 
 -- --------------------------------------------------------
 
@@ -70,17 +70,22 @@ CREATE TABLE `envio` (
 
 INSERT INTO `envio` (`id`, `user_id`, `paquete_id`, `repartidor_id`, `pago`, `estado`, `direccion_envio`, `fecha_pedido`, `fecha_en_camino`, `fecha_entregado`) VALUES
 (2, 2, 1, 3, '35', 'Entregado', 1, '2018-05-02 20:55:59', '2018-05-02 23:46:20', '2018-05-02 23:46:20'),
-(7, 2, 3, NULL, '35', 'Solicitado', 1, '2018-05-02 23:06:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(9, 2, 4, NULL, '35', 'Solicitado', 1, '2018-05-02 23:08:39', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(10, 2, 5, NULL, '35', 'Solicitado', 1, '2018-05-02 23:13:55', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(11, 2, 6, NULL, '35', 'Solicitado', 1, '2018-05-02 23:16:57', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(12, 2, 7, NULL, '35', 'Solicitado', 1, '2018-05-02 23:18:59', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(13, 2, 8, NULL, '35', 'Solicitado', 1, '2018-05-02 23:29:27', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(14, 2, 9, NULL, '35', 'Solicitado', 1, '2018-05-02 23:42:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(15, 2, 10, NULL, '35', 'Solicitado', 1, '2018-05-02 23:45:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(16, 2, 11, NULL, '35', 'Solicitado', 1, '2018-05-02 23:53:25', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(17, 2, 12, NULL, '35', 'Solicitado', 1, '2018-05-03 00:00:08', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(18, 2, 13, NULL, '35', 'Solicitado', 1, '2018-05-03 00:11:06', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(7, 2, 3, 3, '35', 'Entregado', 1, '2018-05-02 23:06:56', '2018-05-03 19:04:58', '2018-05-03 19:04:58'),
+(9, 2, 4, 3, '35', 'Entregado', 1, '2018-05-02 23:08:39', '2018-05-03 19:05:06', '2018-05-03 19:05:06'),
+(10, 2, 5, 3, '35', 'Entregado', 1, '2018-05-02 23:13:55', '2018-05-03 19:10:10', '2018-05-03 19:10:10'),
+(11, 2, 6, 3, '35', 'Entregado', 1, '2018-05-02 23:16:57', '2018-05-03 19:10:41', '2018-05-03 19:10:41'),
+(12, 2, 7, 3, '35', 'Entregado', 1, '2018-05-02 23:18:59', '2018-05-03 19:10:47', '2018-05-03 19:10:47'),
+(13, 2, 8, 3, '35', 'Entregado', 1, '2018-05-02 23:29:27', '2018-05-03 19:10:53', '2018-05-03 19:10:53'),
+(14, 2, 9, 3, '35', 'Entregado', 1, '2018-05-02 23:42:32', '2018-05-03 19:11:00', '2018-05-03 19:11:00'),
+(15, 2, 10, 3, '35', 'Entregado', 1, '2018-05-02 23:45:20', '2018-05-03 19:11:07', '2018-05-03 19:11:07'),
+(16, 2, 11, 3, '35', 'Entregado', 1, '2018-05-02 23:53:25', '2018-05-03 19:10:24', '2018-05-03 19:10:24'),
+(17, 2, 12, 3, '35', 'Entregado', 1, '2018-05-03 00:00:08', '2018-05-03 19:12:53', '2018-05-03 19:12:53'),
+(18, 2, 13, 3, '35', 'En camino', 1, '2018-05-03 00:11:06', '2018-05-03 19:13:02', '2018-05-03 19:13:02'),
+(19, 2, 14, NULL, '35', 'Solicitado', 1, '2018-05-03 10:05:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(20, 2, 15, NULL, '35', 'Solicitado', 1, '2018-05-03 20:29:27', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(21, 2, 16, NULL, '35', 'Solicitado', 1, '2018-05-03 20:53:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(22, 6, 17, NULL, '35', 'Solicitado', 1, '2018-05-03 21:32:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(23, 2, 18, NULL, '35', 'Solicitado', 1, '2018-05-03 22:05:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -105,13 +110,18 @@ INSERT INTO `paquete` (`id`, `contenido`, `valor`) VALUES
 (4, '12 de Tecate', '200'),
 (5, 'Muchas cosas', '1000'),
 (6, 'Un Tiranosaurio Rex', '1000'),
-(7, 'Tachas, tachas y perico', NULL),
-(8, 'Gema del espacio', NULL),
-(9, 'Gema de la mente', NULL),
-(10, 'Gema del tiempo', NULL),
-(11, 'Gema del ama', NULL),
-(12, 'Gema del poder', NULL),
-(13, 'Pan con queso', NULL);
+(7, 'Tachas, tachas y perico', '1000'),
+(8, 'Gema del espacio', '5000'),
+(9, 'Gema de la mente', '5000'),
+(10, 'Gema del tiempo', '5000'),
+(11, 'Gema del ama', '5000'),
+(12, 'Gema del poder', '5000'),
+(13, 'Pan con queso', '100'),
+(14, 'Hamburguesa del burbano', NULL),
+(15, '10 Kilos de papas', NULL),
+(16, 'Lo que alcance con 200 pesos', NULL),
+(17, 'Guante del infinito', NULL),
+(18, 'Escudo del CapitÃ¡n AmÃ©rica', NULL);
 
 -- --------------------------------------------------------
 
@@ -155,7 +165,8 @@ INSERT INTO `user` (`id`, `fullname`, `username`, `email`, `password`, `rol`, `p
 -- Indices de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indices de la tabla `envio`
@@ -193,13 +204,13 @@ ALTER TABLE `direccion`
 -- AUTO_INCREMENT de la tabla `envio`
 --
 ALTER TABLE `envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -210,6 +221,12 @@ ALTER TABLE `user`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Filtros para la tabla `envio`
