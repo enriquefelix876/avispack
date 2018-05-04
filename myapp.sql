@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-05-2018 a las 07:58:45
+-- Tiempo de generación: 04-05-2018 a las 09:52:29
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -80,12 +80,13 @@ INSERT INTO `envio` (`id`, `user_id`, `paquete_id`, `repartidor_id`, `pago`, `es
 (15, 2, 10, 3, '35', 'Entregado', 1, '2018-05-02 23:45:20', '2018-05-03 19:11:07', '2018-05-03 19:11:07'),
 (16, 2, 11, 3, '35', 'Entregado', 1, '2018-05-02 23:53:25', '2018-05-03 19:10:24', '2018-05-03 19:10:24'),
 (17, 2, 12, 3, '35', 'Entregado', 1, '2018-05-03 00:00:08', '2018-05-03 19:12:53', '2018-05-03 19:12:53'),
-(18, 2, 13, 3, '35', 'En camino', 1, '2018-05-03 00:11:06', '2018-05-03 19:13:02', '2018-05-03 19:13:02'),
-(19, 2, 14, NULL, '35', 'Solicitado', 1, '2018-05-03 10:05:40', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(20, 2, 15, NULL, '35', 'Solicitado', 1, '2018-05-03 20:29:27', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(21, 2, 16, NULL, '35', 'Solicitado', 1, '2018-05-03 20:53:13', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 2, 13, 3, '35', 'Entregado', 1, '2018-05-03 00:11:06', '2018-05-04 00:44:47', '2018-05-04 00:44:47'),
+(19, 2, 14, 3, '35', 'Entregado', 1, '2018-05-03 10:05:40', '2018-05-04 00:44:40', '2018-05-04 00:44:40'),
+(20, 2, 15, 3, '35', 'En camino', 1, '2018-05-03 20:29:27', '2018-05-04 00:00:00', '2018-05-04 00:47:06'),
+(21, 2, 16, 3, '35', 'En camino', 1, '2018-05-03 20:53:13', '2018-05-04 00:00:00', '2018-05-04 00:47:10'),
 (22, 6, 17, NULL, '35', 'Solicitado', 1, '2018-05-03 21:32:05', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(23, 2, 18, NULL, '35', 'Solicitado', 1, '2018-05-03 22:05:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(23, 2, 18, NULL, '35', 'Solicitado', 1, '2018-05-03 22:05:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(24, 2, 19, NULL, '35', 'Solicitado', 1, '2018-05-04 00:41:11', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -117,11 +118,12 @@ INSERT INTO `paquete` (`id`, `contenido`, `valor`) VALUES
 (11, 'Gema del ama', '5000'),
 (12, 'Gema del poder', '5000'),
 (13, 'Pan con queso', '100'),
-(14, 'Hamburguesa del burbano', NULL),
-(15, '10 Kilos de papas', NULL),
-(16, 'Lo que alcance con 200 pesos', NULL),
+(14, 'Hamburguesa del burbano', '80'),
+(15, '10 Kilos de papas', '200'),
+(16, 'Lo que alcance con 200 pesos', '200'),
 (17, 'Guante del infinito', NULL),
-(18, 'Escudo del CapitÃ¡n AmÃ©rica', NULL);
+(18, 'Escudo del CapitÃ¡n AmÃ©rica', NULL),
+(19, '1 Litro de leche', NULL);
 
 -- --------------------------------------------------------
 
@@ -204,13 +206,13 @@ ALTER TABLE `direccion`
 -- AUTO_INCREMENT de la tabla `envio`
 --
 ALTER TABLE `envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
