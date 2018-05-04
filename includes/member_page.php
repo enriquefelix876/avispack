@@ -214,6 +214,7 @@ $query4 = $con->query($sql4);
                         <th style="width:250px" class="table-primary" scope="row">Costo</th>
                         <th style="width:250px" class="table-primary" scope="row">Fecha Pedido</th>
                         <th style="width:250px" class="table-primary" scope="row">En camino desde</th>
+                        <th style="width:250px" class="table-primary" scope="row">Repartidor</th>
                     </tr>
                     <tr>
                     <?php
@@ -224,6 +225,7 @@ $query4 = $con->query($sql4);
                         <td class="table-secondary"><?php echo $datos_pendientes3['valor']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['fecha_pedido']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['fecha_en_camino']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['fullname']?></td>
                         </tr>
                         <?php
                         }
