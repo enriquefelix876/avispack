@@ -16,11 +16,36 @@ while($datos=$query->fetch_array()){
     $fechaRegistro = $datos["created_at"];
 }
 
+//Generación de pedidos pendientes
+$sql2 = "select paquete.contenido, direccion.address, envio.pago, envio.fecha_pedido 
+FROM (( envio 
+INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'Solicitado') 
+INNER JOIN direccion ON envio.direccion_envio = direccion.id) ORDER BY `envio`.`fecha_pedido` DESC";
+$query2 = $con->query($sql2);
+
+//Generación de pedidos pendientes
+$sql3 = "select paquete.contenido, direccion.address, envio.pago, user.fullname, envio.fecha_pedido, envio.fecha_en_camino, paquete.valor
+    FROM((( envio 
+    INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'En camino') 
+    INNER JOIN direccion ON envio.direccion_envio = direccion.id)
+    INNER JOIN user ON envio.repartidor_id = user.id) ORDER BY `envio`.`fecha_en_camino` DESC;";
+$query3 = $con->query($sql3);
+
+
+//Generación de pedidos entregados
+$sql4 = "select paquete.contenido, direccion.address, envio.pago, user.fullname, envio.fecha_pedido, envio.fecha_en_camino, paquete.valor, envio.fecha_entregado
+    FROM((( envio 
+    INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'Entregado') 
+    INNER JOIN direccion ON envio.direccion_envio = direccion.id)
+    INNER JOIN user ON envio.repartidor_id = user.id) ORDER BY `envio`.`fecha_entregado` DESC;";
+$query4 = $con->query($sql4);
+
+
 ?>
 
 <div class="container">
     <div class="row" style="padding-top:20px">
-        <div class="col-3">
+        <div class="col-2">
             
             <div class="row">
                 <img style="padding-top:20px" src="./img/user_man.png" alt="Imagen de Usuario">
@@ -66,47 +91,196 @@ while($datos=$query->fetch_array()){
                 </div>
                 </div>
             </div>
+            
+            
+            <div class="row" style="padding-top:15px">
+                
+                <!-- Button trigger modal -->
+                <button type="button" style="width:150px" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
+                Agregar Dirección
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Agregar Dirección</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quas, iure voluptatem nihil alias veritatis a officia pariatur excepturi voluptatibus voluptas molestiae necessitatibus rem fuga non fugit maiores temporibus harum!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Agregar</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+
 
             <div class="row" style="padding-top:15px">
                 <a href="./editar_usuario.php?id=<?php echo $_SESSION["user_id"]?>"><button style="width:150px" type="button" 
-                class="btn btn-success">Editar Perfil</button></a>
+                class="btn btn-secondary">Editar Perfil</button></a>
             </div>
 
         </div>
 
         <div class="col">
-            <table class="table">
+
+
+<ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" 
+    role="tab" aria-controls="pills-home" aria-selected="true">Pendientes</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" 
+    role="tab" aria-controls="pills-profile" aria-selected="false">En Camino</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" 
+    role="tab" aria-controls="pills-contact" aria-selected="false">Entregados</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <?php
+
+        $resultado = mysqli_query($con, $sql2) or die (mysqli_error($con));
+
+        //Se comprueba si hay registros
+        $id_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
+
+        $id = $id_resultado['contenido'];
+
+    if($id==null){
+        echo "<p>Actualmente no tienes pedidos pendientes</p>";
+    }else{
+        ?>
+    <table class="table" id="example" class="table table-striped table-bordered" style="width:100%">
                 <tbody>
                     <tr>
-                        <th style="width:250px" class="table-primary" scope="row">ID</th>
-                        <td class="table-secondary"><?php echo $id?></td>
+                        <th style="width:250px" class="table-primary text-center" scope="row">Descripción</th>
+                        <th style="width:250px" class="table-primary text-center" scope="row">Dirección</th>
+                        <th style="width:250px" class="table-primary text-center" scope="row">Comisión</th>
+                        <th style="width:250px" class="table-primary text-center" scope="row">Fecha Pedido</th>
                     </tr>
                     <tr>
-                        <th class="table-primary"scope="row">Nombre Completo</th>
-                        <td class="table-secondary"><?php echo $nombreCompleto?></td>
-                    </tr>
-                    <tr>
-                        <th class="table-primary" scope="row">Nombre de Usuario</th>
-                        <td class="table-secondary"><?php echo $nombreCompleto?></td>
-                    </tr>
-                    <tr>
-                        <th class="table-primary" scope="row">Correo Electronico</th>
-                        <td class="table-secondary"><?php echo $email?></td>
-                    </tr>
-                    <tr>
-                        <th class="table-primary" scope="row">Rol</th>
-                        <td class="table-secondary"><?php echo $rol?></td>
-                    </tr>
-                    <tr>
-                        <th class="table-primary" scope="row">Numero Telefonico</th>
-                        <td class="table-secondary"><?php echo $numeroTelefono?></td>
-                    </tr>
-                    <tr>
-                        <th class="table-primary" scope="row">Fecha de Registro</th>
-                        <td class="table-secondary"><?php echo $fechaRegistro?></td>
-                    </tr>
+                    <?php
+                        while($datos_pendientes=$query2->fetch_array()){
+                        ?>
+                        <td class="table-secondary"><?php echo $datos_pendientes['contenido']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes['address']?></td>
+                        <td class="table-secondary text-center"><?php echo $datos_pendientes['pago']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes['fecha_pedido']?></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
                 </tbody>
             </table>
+            <?php
+            }
+            ?>
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+
+        <?php
+
+        $resultado3 = mysqli_query($con, $sql3) or die (mysqli_error($con));
+
+        //Se comprueba si hay registros en camino
+        $id_resultado3 = mysqli_fetch_array($resultado3, MYSQLI_ASSOC);
+
+        $id3 = $id_resultado3['contenido'];
+
+        if($id3==null){
+        echo "<p>Actualmente no tienes ningún pedido en camino</p>";
+        }else{
+        ?>
+  <table class="table">
+                <tbody>
+                    <tr>
+                        <th style="width:250px" class="table-primary" scope="row">Descripción</th>
+                        <th style="width:250px" class="table-primary" scope="row">Dirección</th>
+                        <th style="width:250px" class="table-primary" scope="row">Costo</th>
+                        <th style="width:250px" class="table-primary" scope="row">Fecha Pedido</th>
+                        <th style="width:250px" class="table-primary" scope="row">En camino desde</th>
+                    </tr>
+                    <tr>
+                    <?php
+                        while($datos_pendientes3=$query3->fetch_array()){
+                        ?>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['contenido']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['address']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['valor']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['fecha_pedido']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['fecha_en_camino']?></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                </tbody>
+            </table>
+            <?php
+            }
+            ?>
+
+    </div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+  
+    <?php
+
+    $resultado4 = mysqli_query($con, $sql4) or die (mysqli_error($con));
+
+    //Se comprueba si hay registros en camino
+    $id_resultado4 = mysqli_fetch_array($resultado4, MYSQLI_ASSOC);
+
+    $id4 = $id_resultado4['contenido'];
+
+    if($id4==null){
+    echo "<p>Actualmente no le han entregado ningún pedido</p>";
+    }else{
+    ?>
+    <table class="table">
+            <tbody>
+                <tr>
+                    <th style="width:250px" class="table-primary" scope="row">Descripción</th>
+                    <th style="width:250px" class="table-primary" scope="row">Dirección</th>
+                    <th style="width:250px" class="table-primary" scope="row">Costo</th>
+                    <th style="width:250px" class="table-primary" scope="row">Comisión</th>
+                    <th style="width:250px" class="table-primary" scope="row">Entregado en</th>
+                </tr>
+                <tr>
+                <?php
+                    while($datos_pendientes4=$query4->fetch_array()){
+                    ?>
+                    <td class="table-secondary"><?php echo $datos_pendientes4['contenido']?></td>
+                    <td class="table-secondary"><?php echo $datos_pendientes4['address']?></td>
+                    <td class="table-secondary"><?php echo $datos_pendientes4['valor']?></td>
+                    <td class="table-secondary"><?php echo $datos_pendientes4['pago']?></td>
+                    <td class="table-secondary"><?php echo $datos_pendientes4['fecha_entregado']?></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+            </tbody>
+        </table>
+        <?php
+        }
+        ?>
+
+  </div>
+</div>
+
         </div>
     </div>
 </div>
