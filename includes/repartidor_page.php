@@ -17,7 +17,7 @@ while($datos=$query->fetch_array()){
 }
 
 //Generación de envios pendientes
-$sql2 = "select direccion.address, user.fullname, paquete.contenido, envio.fecha_pedido, user.id
+$sql2 = "select direccion.address, user.fullname, paquete.contenido, envio.fecha_pedido, user.id, envio.id
     FROM((( envio 
     INNER JOIN direccion on envio.direccion_envio = direccion.id) 
     INNER JOIN paquete on envio.paquete_id = paquete.id) 
@@ -92,7 +92,7 @@ $query2 = $con->query($sql2);
                                 ?>
                                 <td class="table-secondary"><?php echo $datos_pendientes['contenido']?></td>
                                 <td class="table-secondary"><?php echo $datos_pendientes['address']?></td>
-                                <td class="table-secondary"><a href="./info_usuario_admin.php?id=<?php echo $datos_pendientes['id']?>"><?php echo $datos_pendientes['fullname']?></a></td>
+                                <td class="table-secondary text-center"><a href="./info_usuario_admin.php?id=<?php echo $datos_pendientes['4']?>"><?php echo $datos_pendientes['fullname']?></a></td>
                                 <td class="table-secondary text-center"><?php echo $datos_pendientes['fecha_pedido']?></td>
                                     
                                 <td class="table-secondary text-center">
@@ -131,7 +131,7 @@ $query2 = $con->query($sql2);
                                 </div>
                                 </td>
                                 
-                                <td class="table-secondary text-center"><a href="">Cancelar</a></td>
+                                <td class="table-secondary text-center"><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes['5']?>">Cancelar</a></td>
                                 </tr>
                                 <?php
                                 }
