@@ -17,10 +17,11 @@ while($datos=$query->fetch_array()){
 }
 
 //Generación de pedidos pendientes
-$sql2 = "select paquete.contenido, direccion.address, envio.pago, envio.fecha_pedido 
-FROM (( envio 
-INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'Solicitado') 
-INNER JOIN direccion ON envio.direccion_envio = direccion.id) ORDER BY `envio`.`fecha_pedido` DESC";
+$sql2 = "select envio.id, paquete.contenido, direccion.address, envio.pago, envio.fecha_pedido 
+    FROM (( envio 
+    INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'Solicitado') 
+    INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
+    ORDER BY `envio`.`fecha_pedido` DESC";
 $query2 = $con->query($sql2);
 
 //Generación de pedidos pendientes
@@ -28,7 +29,8 @@ $sql3 = "select paquete.contenido, direccion.address, envio.pago, user.fullname,
     FROM((( envio 
     INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'En camino') 
     INNER JOIN direccion ON envio.direccion_envio = direccion.id)
-    INNER JOIN user ON envio.repartidor_id = user.id) ORDER BY `envio`.`fecha_en_camino` DESC;";
+    INNER JOIN user ON envio.repartidor_id = user.id) 
+    ORDER BY `envio`.`fecha_en_camino` DESC;";
 $query3 = $con->query($sql3);
 
 
@@ -37,8 +39,18 @@ $sql4 = "select paquete.contenido, direccion.address, envio.pago, user.fullname,
     FROM((( envio 
     INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'Entregado') 
     INNER JOIN direccion ON envio.direccion_envio = direccion.id)
-    INNER JOIN user ON envio.repartidor_id = user.id) ORDER BY `envio`.`fecha_entregado` DESC;";
+    INNER JOIN user ON envio.repartidor_id = user.id) 
+    ORDER BY `envio`.`fecha_entregado` DESC;";
 $query4 = $con->query($sql4);
+
+//Generación de pedidos cancelados
+$sql5 = "select envio.id, paquete.contenido, direccion.address, envio.fecha_cancelado 
+    FROM(( envio
+    INNER JOIN paquete ON envio.paquete_id = paquete.id) 
+    INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
+    WHERE envio.estado = 'Cancelado' && envio.user_id = \"$_SESSION[user_id]\" 
+    ORDER BY `envio`.`fecha_cancelado` DESC;";
+$query5 = $con->query($sql5);
 
 
 ?>
@@ -147,6 +159,10 @@ $query4 = $con->query($sql4);
     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" 
     role="tab" aria-controls="pills-contact" aria-selected="false">Entregados</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-cancelado-tab" data-toggle="pill" href="#pills-cancelado" 
+    role="tab" aria-controls="pills-cancelado" aria-selected="false">Cancelados</a>
+  </li>
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
@@ -171,6 +187,7 @@ $query4 = $con->query($sql4);
                         <th style="width:250px" class="table-primary text-center" scope="row">Dirección</th>
                         <th style="width:250px" class="table-primary text-center" scope="row">Comisión</th>
                         <th style="width:250px" class="table-primary text-center" scope="row">Fecha Pedido</th>
+                        <th style="width:250px" class="table-primary text-center" scope="row">Cancelar Pedido</th>
                     </tr>
                     <tr>
                     <?php
@@ -180,6 +197,7 @@ $query4 = $con->query($sql4);
                         <td class="table-secondary"><?php echo $datos_pendientes['address']?></td>
                         <td class="table-secondary text-center"><?php echo $datos_pendientes['pago']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes['fecha_pedido']?></td>
+                        <td class="table-secondary text-center"><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes['id']?>">Cancelar</a></td>
                         </tr>
                         <?php
                         }
@@ -281,6 +299,51 @@ $query4 = $con->query($sql4);
         ?>
 
   </div>
+
+    <div class="tab-pane fade" id="pills-cancelado" role="tabpanel" aria-labelledby="pills-cancelado-tab">
+    
+    <?php
+
+    $resultado5 = mysqli_query($con, $sql5) or die (mysqli_error($con));
+
+    //Se comprueba si hay registros cancelados
+    $id_resultado5 = mysqli_fetch_array($resultado5, MYSQLI_ASSOC);
+
+    $id5 = $id_resultado5['contenido'];
+
+    if($id5==null){
+    echo "<p>No tiene ningún pedido cancelado</p>";
+    }else{
+    ?>
+    <table class="table">
+            <tbody>
+                <tr>
+                    <th style="width:250px" class="table-primary" scope="row">Descripción</th>
+                    <th style="width:250px" class="table-primary" scope="row">Dirección</th>
+                    <th style="width:250px" class="table-primary" scope="row">Fecha Cancelación</th>
+                    <th style="width:250px" class="table-primary" scope="row">Eliminar</th>
+                </tr>
+                <tr>
+                <?php
+                    while($datos_pendientes5=$query5->fetch_array()){
+                    ?>
+                    <td class="table-secondary"><?php echo $datos_pendientes5['contenido']?></td>
+                    <td class="table-secondary"><?php echo $datos_pendientes5['address']?></td>
+                    <td class="table-secondary"><?php echo $datos_pendientes5['fecha_cancelado']?></td>
+                    <td class="table-secondary"><a href="php/eliminar_pedido.php?id=<?php echo $datos_pendientes5['id']?>">
+                    Eliminar</a></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+            </tbody>
+        </table>
+        <?php
+        }
+        ?>
+
+    </div>
+
 </div>
 
         </div>

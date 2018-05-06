@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user_rol"] != "Administrador"){
+if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user_rol"] == "Miembro"){
     print "<script>alert(\"Acceso invalido!\");window.location='index.php';</script>";
 }
 ?>
@@ -11,6 +11,39 @@ include "php/conexion.php";
 			
 $sql= "select * from user where id = \"$_GET[id]\"";
 $query = $con->query($sql);
+
+$sql2= "select * from envio where user_id = \"$_GET[id]\"";
+$query2 = $con->query($sql2);
+
+$entregado = 0;
+$en_camino = 0;
+$solicitado = 0;
+$cancelado = 0;
+
+while($datos2=$query2->fetch_array()){
+
+    switch($datos2["estado"]){
+
+        case "Solicitado":
+            $solicitado++;
+        break;
+
+        case "En Camino":
+            $en_camino++;
+        break;
+
+        case "Entregado":
+            $entregado++;
+        break;
+
+        case "Cancelado":
+            $cancelado++;
+        break;
+
+        default:
+        break;
+    }
+}
 
 ?>
 
@@ -40,10 +73,13 @@ $query = $con->query($sql);
     }
     
     ?>
-    
+<?php   
+if($_SESSION["user_rol"]=='Administrador'){
+?>
+
 <div class="container">
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <div class="row">
                 <h2 style="padding-top:150px">Editar Usuario</h2>
             </div>
@@ -54,6 +90,7 @@ $query = $con->query($sql);
             <div class="row">
                 <p class="h5 p-2"><?php echo $nombreCompleto?></p>
             </div>
+            
             <div class="row">
                 <a href="editar_usuario_admin.php?id=<?php echo $_GET["id"]?>"><button style="width:150px" type="button" class="btn btn-success">Modificar Usuario</button></a>
             </div>
@@ -97,11 +134,80 @@ $query = $con->query($sql);
                         <th class="table-primary" scope="row">Fecha de Registro</th>
                         <td class="table-secondary"><?php echo $fechaRegistro?></td>
                     </tr>
+                   
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<?php
+}
+?>
+
+<?php   
+if($_SESSION["user_rol"]=='Repartidor'){
+?>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+
+            <div class="row" style="padding-top:200px">
+                <img style="padding-top:20px" src="./img/user_man.png" alt="Imagen de Usuario">
+            </div>
+            <div class="row">
+                <p class="h5 p-2"><?php echo $nombreCompleto?></p>
+            </div>
+
+            <div class="row" style="padding-top:15px">
+                <a href="./home.php"><button style="width:150px" type="button" class="btn btn-secondary">Regresar</button></a>
+            </div>
+        </div>
+
+        <div class="col" style="padding-top:150px">
+            <h2 style="padding-bottom:15px">Información de Usuario</h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="table-primary"scope="row">Nombre Completo</th>
+                        <td class="table-secondary"><?php echo $nombreCompleto?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Nombre de Usuario</th>
+                        <td class="table-secondary"><?php echo $nombreUsuario?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Correo Electronico</th>
+                        <td class="table-secondary"><?php echo $email?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Rol</th>
+                        <td class="table-secondary"><?php echo $rol?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Numero Telefonico</th>
+                        <td class="table-secondary"><?php echo $numeroTelefono?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Fecha de Registro</th>
+                        <td class="table-secondary"><?php echo $fechaRegistro?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Pedidos Recibidos</th>
+                        <td class="table-secondary"><?php echo $entregado?></td>
+                    </tr>
+                    <tr>
+                        <th class="table-primary" scope="row">Pedidos Cancelados</th>
+                        <td class="table-secondary"><?php echo $cancelado?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<?php
+}
+?>
 
 </body>
 </html>

@@ -8,9 +8,23 @@ $query = $con->query($sql);
 
 ?>
 
-<table class="table table-striped table-dark">
+<div class="container" style="padding-top:20px; padding-bottom: 20px">
+  <div class="row">
+
+    <div class="col-2">
+      <input type="text">
+    </div>
+
+    <div class="col">
+      <button type="submit">Buscar</button>
+    </div>
+
+  </div>
+</div>
+
+<table class="table">
   <thead>
-    <tr>
+    <tr class="table-secondary">
       <th scope="col">ID</th>
       <th scope="col">Nombre completo</th>
       <th scope="col">Nombre de Usuario</th>
@@ -26,7 +40,7 @@ $query = $con->query($sql);
     
 ?>
     <tbody>
-    <tr>
+    <tr class¨="table-primary">
       <th scope="row"> <?php echo $datos["id"]?> </th>
       <td> <?php echo $datos["fullname"]?> </td>
       <td> <?php echo $datos["username"]?> </td>
