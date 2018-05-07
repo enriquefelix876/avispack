@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2018 a las 14:57:54
+-- Tiempo de generación: 07-05-2018 a las 10:01:26
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -57,6 +57,7 @@ CREATE TABLE `envio` (
   `paquete_id` int(11) NOT NULL,
   `repartidor_id` int(11) DEFAULT NULL,
   `pago` varchar(10) DEFAULT NULL,
+  `detalle` varchar(200) NOT NULL,
   `estado` enum('Solicitado','En camino','Entregado','Cancelado') NOT NULL DEFAULT 'Solicitado',
   `direccion_envio` int(11) NOT NULL,
   `fecha_pedido` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -69,25 +70,13 @@ CREATE TABLE `envio` (
 -- Volcado de datos para la tabla `envio`
 --
 
-INSERT INTO `envio` (`id`, `user_id`, `paquete_id`, `repartidor_id`, `pago`, `estado`, `direccion_envio`, `fecha_pedido`, `fecha_en_camino`, `fecha_entregado`, `fecha_cancelado`) VALUES
-(7, 2, 3, 3, '35', 'Entregado', 1, '2018-05-02 23:06:56', '2018-05-03 19:04:58', '2018-05-03 19:04:58', '0000-00-00 00:00:00'),
-(9, 2, 4, 3, '35', 'Entregado', 1, '2018-05-02 23:08:39', '2018-05-03 19:05:06', '2018-05-03 19:05:06', '0000-00-00 00:00:00'),
-(10, 2, 5, 3, '35', 'Entregado', 1, '2018-05-02 23:13:55', '2018-05-03 19:10:10', '2018-05-03 19:10:10', '0000-00-00 00:00:00'),
-(12, 2, 7, 3, '35', 'Entregado', 1, '2018-05-02 23:18:59', '2018-05-03 19:10:47', '2018-05-03 19:10:47', '0000-00-00 00:00:00'),
-(13, 2, 8, 3, '35', 'Entregado', 1, '2018-05-02 23:29:27', '2018-05-03 19:10:53', '2018-05-03 19:10:53', '0000-00-00 00:00:00'),
-(14, 2, 9, 3, '35', 'Entregado', 1, '2018-05-02 23:42:32', '2018-05-03 19:11:00', '2018-05-03 19:11:00', '0000-00-00 00:00:00'),
-(15, 2, 10, 3, '35', 'Entregado', 1, '2018-05-02 23:45:20', '2018-05-03 19:11:07', '2018-05-03 19:11:07', '0000-00-00 00:00:00'),
-(16, 2, 11, 3, '35', 'Entregado', 1, '2018-05-02 23:53:25', '2018-05-03 19:10:24', '2018-05-03 19:10:24', '0000-00-00 00:00:00'),
-(17, 2, 12, 3, '35', 'Entregado', 1, '2018-05-03 00:00:08', '2018-05-03 19:12:53', '2018-05-03 19:12:53', '0000-00-00 00:00:00'),
-(18, 2, 13, 3, '35', 'Entregado', 1, '2018-05-03 00:11:06', '2018-05-04 00:44:47', '2018-05-04 00:44:47', '0000-00-00 00:00:00'),
-(19, 2, 14, 3, '35', 'Entregado', 1, '2018-05-03 10:05:40', '2018-05-04 00:44:40', '2018-05-04 00:44:40', '0000-00-00 00:00:00'),
-(20, 2, 15, 3, '35', 'En camino', 1, '2018-05-03 20:29:27', '2018-05-04 00:00:00', '2018-05-04 00:47:06', '0000-00-00 00:00:00'),
-(21, 2, 16, 3, '35', 'Cancelado', 1, '2018-05-03 20:53:13', '2018-05-06 02:14:30', '2018-05-06 02:14:30', '2018-05-06 02:14:30'),
-(24, 2, 19, NULL, '35', 'Cancelado', 1, '2018-05-04 00:41:11', '2018-05-06 01:55:39', '2018-05-06 01:55:39', '2018-05-06 01:55:39'),
-(27, 6, 22, NULL, '35', 'Cancelado', 1, '2018-05-04 11:00:49', '2018-05-06 03:05:22', '2018-05-06 03:05:22', '2018-05-06 03:05:22'),
-(29, 2, 24, NULL, '35', 'Cancelado', 1, '2018-05-06 02:24:00', '2018-05-06 02:58:12', '2018-05-06 02:58:12', '2018-05-06 02:58:12'),
-(30, 6, 25, NULL, '35', 'Solicitado', 1, '2018-05-06 03:07:53', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2018-05-06 03:07:53'),
-(31, 2, 26, NULL, '35', 'Solicitado', 1, '2018-05-06 03:13:29', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2018-05-06 03:13:29');
+INSERT INTO `envio` (`id`, `user_id`, `paquete_id`, `repartidor_id`, `pago`, `detalle`, `estado`, `direccion_envio`, `fecha_pedido`, `fecha_en_camino`, `fecha_entregado`, `fecha_cancelado`) VALUES
+(33, 2, 28, 3, '35', '10 Kilos de papas -Super  del norte', 'En camino', 1, '2018-05-06 22:47:09', '2018-05-06 22:50:25', '2018-05-06 22:50:25', '2018-05-06 22:47:09'),
+(35, 2, 30, 3, '35', 'Iphone X - Coppel', 'En camino', 1, '2018-05-06 22:51:56', '2018-05-06 22:59:39', '2018-05-06 22:59:39', '2018-05-06 22:51:56'),
+(36, 2, 31, 3, '35', 'Hamburguera - Tienda Burbano', 'En camino', 1, '2018-05-06 23:55:46', '2018-05-07 00:02:29', '2018-05-07 00:02:29', '2018-05-06 23:55:46'),
+(37, 2, 32, 3, '35', 'Pantalon dockers negro - Coppel', 'En camino', 1, '2018-05-07 00:11:47', '2018-05-07 00:12:53', '2018-05-07 00:12:53', '2018-05-07 00:11:47'),
+(38, 2, 33, 3, '35', '12 de tecate - Super Six', 'En camino', 1, '2018-05-07 00:16:51', '2018-05-07 00:17:28', '2018-05-07 00:17:28', '2018-05-07 00:16:51'),
+(39, 2, 34, NULL, '35', '', 'Cancelado', 1, '2018-05-07 00:40:56', '2018-05-07 00:54:40', '2018-05-07 00:54:40', '2018-05-07 00:54:40');
 
 -- --------------------------------------------------------
 
@@ -106,32 +95,12 @@ CREATE TABLE `paquete` (
 --
 
 INSERT INTO `paquete` (`id`, `contenido`, `valor`) VALUES
-(1, '2 Pizzas Little Caesars', '180'),
-(2, 'Paquete 1 Comida china', '55'),
-(3, 'Tacos de los mortales. 12 normales.', '200'),
-(4, '12 de Tecate', '200'),
-(5, 'Muchas cosas', '1000'),
-(6, 'Un Tiranosaurio Rex', '1000'),
-(7, 'Tachas, tachas y perico', '1000'),
-(8, 'Gema del espacio', '5000'),
-(9, 'Gema de la mente', '5000'),
-(10, 'Gema del tiempo', '5000'),
-(11, 'Gema del ama', '5000'),
-(12, 'Gema del poder', '5000'),
-(13, 'Pan con queso', '100'),
-(14, 'Hamburguesa del burbano', '80'),
-(15, '10 Kilos de papas', '200'),
-(16, 'Lo que alcance con 200 pesos', '200'),
-(17, 'Guante del infinito', NULL),
-(18, 'Escudo del CapitÃ¡n AmÃ©rica', NULL),
-(19, '1 Litro de leche', NULL),
-(20, 'Unos stickers del godoy', NULL),
-(21, 'Carne asada', NULL),
-(22, 'Traje de Iron Spider', NULL),
-(23, '8 Quesadillas de queso sin queso', NULL),
-(24, 'Iphone X', NULL),
-(25, 'Pollo Feliz', NULL),
-(26, 'Las esferas del dragÃ³n', NULL);
+(28, '10 kilos de papas', '300'),
+(30, 'Iphone X', '18000'),
+(31, 'Hamburguesa del burbano', '100'),
+(32, 'Pantalon talla 34', '400'),
+(33, '12 de Tecate', '110'),
+(34, 'Guante del infinito', NULL);
 
 -- --------------------------------------------------------
 
@@ -213,13 +182,13 @@ ALTER TABLE `direccion`
 -- AUTO_INCREMENT de la tabla `envio`
 --
 ALTER TABLE `envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
