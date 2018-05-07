@@ -22,8 +22,16 @@ $sql2 = "select direccion.address, user.fullname, paquete.contenido, envio.fecha
     INNER JOIN direccion on envio.direccion_envio = direccion.id) 
     INNER JOIN paquete on envio.paquete_id = paquete.id) 
     INNER JOIN user on envio.user_id = user.id) 
-    WHERE envio.estado = 'Solicitado'";
+    WHERE envio.estado = 'Solicitado' ORDER BY `envio`.`fecha_pedido` DESC";
 $query2 = $con->query($sql2);
+
+//Generación de envios en camino
+$sql3 = "select paquete.contenido, direccion.address, paquete.valor, envio.fecha_en_camino , envio.id
+    FROM (( envio 
+    INNER JOIN paquete ON envio.paquete_id = paquete.id) 
+    INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
+    WHERE envio.repartidor_id = 3 && envio.estado = 'En camino' ORDER BY `envio`.`fecha_en_camino` DESC";
+$query3 = $con->query($sql3);
 
 ?>
 
@@ -97,7 +105,8 @@ $query2 = $con->query($sql2);
                                 <tr>
                                     <td><?php echo $datos_pendientes["contenido"]?></td>
                                     <td><?php echo $datos_pendientes["address"]?></td>
-                                    <td><?php echo $datos_pendientes["fullname"]?></td>
+                                    <td><a href="info_usuario_admin.php?id=<?php echo $datos_pendientes["4"]?>">
+                                    <?php echo $datos_pendientes["fullname"]?></a></td>
                                     <td><?php echo $datos_pendientes["fecha_pedido"]?></td>
                                     <td><a href="confirmar.php?id=<?php echo $datos_pendientes["5"]?>">Confirmar</a></td>
                                     <td><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes["5"]?>">Cancelar</a></td>
@@ -115,7 +124,51 @@ $query2 = $con->query($sql2);
 
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" 
                     aria-labelledby="pills-profile-tab">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam molestias repellendus quas dicta saepe est, fugiat quo officiis rem dolor praesentium accusantium odit quis, nisi odio labore recusandae vero sint.</p>
+                    <!-- Contenido de los pedidos En Camino-->
+
+                    <?php
+
+                        $resultado3 = mysqli_query($con, $sql3) or die (mysqli_error($con));
+
+                        //Se comprueba si hay registros
+                        $id_resultado3 = mysqli_fetch_array($resultado3, MYSQLI_ASSOC);
+
+                        $id3 = $id_resultado3['contenido'];
+
+                        if($id3==null){
+                        echo "<p>No tienes pedidos en camino</p>";
+                        }else{
+                        ?>
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Costo</th>
+                                        <th scope="col">En camino desde</th>
+                                        <th scope="col">Entregar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php while($datos_pendientes3=$query3->fetch_array()){
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $datos_pendientes3["contenido"]?></td>
+                                        <td><?php echo $datos_pendientes3["address"]?></td>
+                                        <td><?php echo $datos_pendientes3["valor"]?></td>
+                                        <td><?php echo $datos_pendientes3["fecha_en_camino"]?></td>
+                                        <td><a href="php/entregar_pedido.php?id=<?php echo $datos_pendientes3["4"]?>">Entregar</a></td>
+                                    </tr>
+                                <?php 
+                                }?>
+
+                                </tbody>
+                                </table>
+                                <?php
+                        }
+                        ?>
+
                     </div>
 
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" 

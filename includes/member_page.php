@@ -195,7 +195,7 @@ $query5 = $con->query($sql5);
                         ?>
                         <td class="table-secondary"><?php echo $datos_pendientes['contenido']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes['address']?></td>
-                        <td class="table-secondary text-center"><?php echo $datos_pendientes['pago']?></td>
+                        <td class="table-secondary text-center"><?php echo "$".$datos_pendientes['pago']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes['fecha_pedido']?></td>
                         <td class="table-secondary text-center"><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes['id']?>">Cancelar</a></td>
                         </tr>
@@ -230,7 +230,6 @@ $query5 = $con->query($sql5);
                         <th style="width:250px" class="table-primary" scope="row">Descripción</th>
                         <th style="width:250px" class="table-primary" scope="row">Dirección</th>
                         <th style="width:250px" class="table-primary" scope="row">Costo</th>
-                        <th style="width:250px" class="table-primary" scope="row">Fecha Pedido</th>
                         <th style="width:250px" class="table-primary" scope="row">En camino desde</th>
                         <th style="width:250px" class="table-primary" scope="row">Repartidor</th>
                     </tr>
@@ -240,8 +239,7 @@ $query5 = $con->query($sql5);
                         ?>
                         <td class="table-secondary"><?php echo $datos_pendientes3['contenido']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['address']?></td>
-                        <td class="table-secondary"><?php echo $datos_pendientes3['valor']?></td>
-                        <td class="table-secondary"><?php echo $datos_pendientes3['fecha_pedido']?></td>
+                        <td class="table-secondary"><?php echo "$".$datos_pendientes3['valor']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['fecha_en_camino']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['fullname']?></td>
                         </tr>
@@ -275,8 +273,7 @@ $query5 = $con->query($sql5);
                 <tr>
                     <th style="width:250px" class="table-primary" scope="row">Descripción</th>
                     <th style="width:250px" class="table-primary" scope="row">Dirección</th>
-                    <th style="width:250px" class="table-primary" scope="row">Costo</th>
-                    <th style="width:250px" class="table-primary" scope="row">Comisión</th>
+                    <th style="width:250px" class="table-primary" scope="row">Total Pagado</th>
                     <th style="width:250px" class="table-primary" scope="row">Entregado en</th>
                 </tr>
                 <tr>
@@ -285,8 +282,7 @@ $query5 = $con->query($sql5);
                     ?>
                     <td class="table-secondary"><?php echo $datos_pendientes4['contenido']?></td>
                     <td class="table-secondary"><?php echo $datos_pendientes4['address']?></td>
-                    <td class="table-secondary"><?php echo $datos_pendientes4['valor']?></td>
-                    <td class="table-secondary"><?php echo $datos_pendientes4['pago']?></td>
+                    <td class="table-secondary"><?php echo "$".($datos_pendientes4['valor']+$datos_pendientes4['pago'])?></td>
                     <td class="table-secondary"><?php echo $datos_pendientes4['fecha_entregado']?></td>
                     </tr>
                     <?php

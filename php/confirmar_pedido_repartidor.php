@@ -8,6 +8,17 @@ include "conexion.php";
 //Update fecha de en camino
 //Update detalle del envio
 
+$user_id = null;
+$comprobacion = "select id from user where id=\"$_SESSION[user_id]\" && rol='Repartidor'";
+            
+$comprobar = $con->query($comprobacion);
+
+while ($r=$comprobar->fetch_array()) {
+    $user_id=$r["id"];
+    break;
+}
+
+if($user_id!=null){
 if(isset($_POST["valor"]) &&isset($_POST["detalle"])){
 
     $sql= "select envio.id, paquete.id
@@ -45,6 +56,12 @@ if(isset($_POST["valor"]) &&isset($_POST["detalle"])){
 
 }else{
     print "<script>alert(\"Asegurese de llenar los campos!\");
+    window.location='../home.php';</script>";
+
+}
+
+}else{
+    print "<script>alert(\"No tienes los permisos necesarios para realizar esta acción!\");
     window.location='../home.php';</script>";
 
 }
