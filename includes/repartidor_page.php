@@ -38,7 +38,8 @@ $sql4 = "select envio.detalle, direccion.address, user.fullname, paquete.valor, 
     FROM((( envio 
     INNER JOIN paquete ON envio.paquete_id = paquete.id) 
     INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
-    INNER JOIN user ON envio.repartidor_id = user.id) where envio.repartidor_id = 3 && estado = 'Entregado'";
+    INNER JOIN user ON envio.repartidor_id = user.id) 
+    WHERE envio.repartidor_id = 3 && estado = 'Entregado' ORDER BY `envio`.`fecha_entregado` DESC";
 $query4 = $con->query($sql4);
 
 ?>
