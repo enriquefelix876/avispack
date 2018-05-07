@@ -123,12 +123,25 @@ $query5 = $con->query($sql5);
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quas, iure voluptatem nihil alias veritatis a officia pariatur excepturi voluptatibus voluptas molestiae necessitatibus rem fuga non fugit maiores temporibus harum!</p>
+
+                        <form action="php/agregar_direccion.php" method="post">
+                            <div class="form-group">
+                                <label for="address">Ingrese su dirección</label>
+                                <input type="text" class="form-control" id="address" name="address" 
+                                placeholder="Ingrese su Dirección"><small class="form-text text-muted">
+                                Ingrese su dirección siguiendo el formato que se muestra</small>
+
+                                <p style="padding-top:10px">Prol Av Periferico 14B, 
+                                Nacionalización del Golfo de California, 
+                                85477 Heroica Guaymas, Son.</p>
+                            </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Agregar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
                     </div>
+                    </form>
                     </div>
                 </div>
                 </div>
