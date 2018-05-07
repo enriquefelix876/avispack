@@ -26,12 +26,20 @@ $sql2 = "select direccion.address, user.fullname, paquete.contenido, envio.fecha
 $query2 = $con->query($sql2);
 
 //Generación de envios en camino
-$sql3 = "select paquete.contenido, direccion.address, paquete.valor, envio.fecha_en_camino , envio.id
-    FROM (( envio 
+$sql3 = "select paquete.contenido, direccion.address, paquete.valor, envio.fecha_en_camino , envio.id, user.fullname, user.id
+    FROM ((( envio 
     INNER JOIN paquete ON envio.paquete_id = paquete.id) 
     INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
+    INNER JOIN user ON envio.user_id = user.id)
     WHERE envio.repartidor_id = 3 && envio.estado = 'En camino' ORDER BY `envio`.`fecha_en_camino` DESC";
 $query3 = $con->query($sql3);
+
+$sql4 = "select envio.detalle, direccion.address, user.fullname, paquete.valor, envio.pago, envio.fecha_entregado, user.id
+    FROM((( envio 
+    INNER JOIN paquete ON envio.paquete_id = paquete.id) 
+    INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
+    INNER JOIN user ON envio.repartidor_id = user.id) where envio.repartidor_id = 3 && estado = 'Entregado'";
+$query4 = $con->query($sql4);
 
 ?>
 
@@ -139,12 +147,12 @@ $query3 = $con->query($sql3);
                         echo "<p>No tienes pedidos en camino</p>";
                         }else{
                         ?>
-
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Dirección</th>
+                                        <th scope="col">Cliente</th>
                                         <th scope="col">Costo</th>
                                         <th scope="col">En camino desde</th>
                                         <th scope="col">Entregar</th>
@@ -156,6 +164,8 @@ $query3 = $con->query($sql3);
                                     <tr>
                                         <td><?php echo $datos_pendientes3["contenido"]?></td>
                                         <td><?php echo $datos_pendientes3["address"]?></td>
+                                        <td><a href="info_usuario_admin.php?id=<?php echo $datos_pendientes3["6"]?>">
+                                        <?php echo $datos_pendientes3["fullname"]?></a></td>
                                         <td><?php echo $datos_pendientes3["valor"]?></td>
                                         <td><?php echo $datos_pendientes3["fecha_en_camino"]?></td>
                                         <td><a href="php/entregar_pedido.php?id=<?php echo $datos_pendientes3["4"]?>">Entregar</a></td>
@@ -173,7 +183,51 @@ $query3 = $con->query($sql3);
 
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" 
                     aria-labelledby="pills-contact-tab">
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum vel assumenda ab excepturi nobis? Ex eos non repudiandae soluta quis facilis ratione eum iste sunt praesentium, officia enim dignissimos autem?</p>
+
+                    <!-- Contenido de los pedidos En Camino-->
+                    <?php
+
+                        $resultado4 = mysqli_query($con, $sql4) or die (mysqli_error($con));
+
+                        //Se comprueba si hay registros
+                        $id_resultado4 = mysqli_fetch_array($resultado4, MYSQLI_ASSOC);
+
+                        $id4 = $id_resultado4['detalle'];
+
+                        if($id4==null){
+                        echo "<p>No haz entregado ningún producto</p>";
+                        }else{
+                        ?>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Cliente</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Fecha Entrega</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php while($datos_pendientes4=$query4->fetch_array()){
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $datos_pendientes4["detalle"]?></td>
+                                        <td><?php echo $datos_pendientes4["address"]?></td>
+                                        <td><a href="info_usuario_admin.php?id=<?php echo $datos_pendientes4["6"]?>">
+                                        <?php echo $datos_pendientes4["fullname"]?></a></td>
+                                        <td><?php echo "$".($datos_pendientes4["valor"]+$datos_pendientes4["pago"])?></td>
+                                        <td><?php echo $datos_pendientes4["fecha_entregado"]?></td>
+                                    </tr>
+                                <?php 
+                                }?>
+
+                                </tbody>
+                                </table>
+                                <?php
+                        }
+                        ?>
+
                     </div>
                     
                 </div>
