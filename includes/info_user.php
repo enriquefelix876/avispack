@@ -37,15 +37,13 @@ while($datos2=$query2->fetch_array()){
             <?php
             if($_SESSION["user_rol"]=='Repartidor'){
                 ?>
-                <h3 style="padding-top:140px;">Pedidos Pendientes<span class="badge badge-primary"><?php echo $filas ?></span></h3>
+                <h3 style="padding-top:140px;">Pedidos Pendientes <span class="badge badge-primary"><?php echo $filas ?></span></h3>
             <?php
             }
             ?>
         </div>
     </div>
 </div>
-
-
 
 
 <?php

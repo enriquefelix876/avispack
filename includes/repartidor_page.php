@@ -42,123 +42,90 @@ $query2 = $con->query($sql2);
             </div>
 
         </div>
+
         <div class="col">
 
-            <div class="row">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" 
+                        href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Solicitados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" 
+                        href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">En camino</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" 
+                        href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Entregados</a>
+                    </li>
+                    </ul>
 
-            <ul class="nav nav-pills mb-3 nav-justified" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" 
-                    aria-controls="home" aria-selected="true">Pendientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" 
-                    aria-controls="profile" aria-selected="false">En Camino</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" 
-                    aria-controls="contact" aria-selected="false">Entregados</a>
-                </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    
-                <?php
+                    <div class="tab-content" id="pills-tabContent">
 
-                $resultado = mysqli_query($con, $sql2) or die (mysqli_error($con));
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" 
+                    aria-labelledby="pills-home-tab">
+                    <!-- Contenido de los pedidos solicitados-->
 
-                //Se comprueba si hay registros
-                $id_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
-
-                $id = $id_resultado['contenido'];
-
-                if($id==null){
-                echo "<p>Actualmente no hay pedidos pendientes</p>";
-                }else{
-                ?>
-                <table class="table" id="example" class="table table-striped table-bordered" style="width:100%">
-                        <tbody>
-                            <tr>
-                                <th style="width:250px" class="table-primary text-center" scope="row">Descripción</th>
-                                <th style="width:250px" class="table-primary text-center" scope="row">Dirección</th>
-                                <th style="width:250px" class="table-primary text-center" scope="row">Nombre</th>
-                                <th style="width:250px" class="table-primary text-center" scope="row">Hora pedido</th>
-                                <th style="width:250px" class="table-primary text-center" scope="row">Confirmar</th>
-                                <th style="width:250px" class="table-primary text-center" scope="row">Cancelar</th>
-                            </tr>
-                            <tr>
-                            <?php
-                                while($datos_pendientes=$query2->fetch_array()){
-                                ?>
-                                <td class="table-secondary"><?php echo $datos_pendientes['contenido']?></td>
-                                <td class="table-secondary"><?php echo $datos_pendientes['address']?></td>
-                                <td class="table-secondary text-center"><a href="./info_usuario_admin.php?id=<?php echo $datos_pendientes['4']?>"><?php echo $datos_pendientes['fullname']?></a></td>
-                                <td class="table-secondary text-center"><?php echo $datos_pendientes['fecha_pedido']?></td>
-                                    
-                                <td class="table-secondary text-center">
-                                <!-- Button trigger modal -->
-                                <a href="" data-toggle="modal" data-target="#exampleModal">
-                                Confirmar
-                                </a>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Confirmar Pedido</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-
-                                    <form action="" method="post">
-                                        <div class="modal-body">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
-                                            obcaecati quisquam minima qui quasi consequatur earum architecto
-                                            iure, fuga ipsam, veritatis, iste sequi aliquam? Repudiandae repellat
-                                            reprehenderit qui quia nisi?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" 
-                                            data-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-primary">Confirmar</button>
-                                        </div>
-                                    </form>
-
-                                    </div>
-                                </div>
-                                </div>
-                                </td>
-                                
-                                <td class="table-secondary text-center"><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes['5']?>">Cancelar</a></td>
-                                </tr>
-                                <?php
-                                }
-                                ?>
-                        </tbody>
-                    </table>
                     <?php
+
+                    $resultado2 = mysqli_query($con, $sql2) or die (mysqli_error($con));
+
+                    //Se comprueba si hay registros
+                    $id_resultado2 = mysqli_fetch_array($resultado2, MYSQLI_ASSOC);
+
+                    $id2 = $id_resultado2['contenido'];
+
+                    if($id2==null){
+                    echo "<p>Actualmente no hay pedidos pendientes</p>";
+                    }else{
+                    ?>
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Dirección</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Hora Pedido</th>
+                                    <th scope="col">Confirmar</th>
+                                    <th scope="col">Cancelar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php while($datos_pendientes=$query2->fetch_array()){
+                                ?>
+                                <tr>
+                                    <td><?php echo $datos_pendientes["contenido"]?></td>
+                                    <td><?php echo $datos_pendientes["address"]?></td>
+                                    <td><?php echo $datos_pendientes["fullname"]?></td>
+                                    <td><?php echo $datos_pendientes["fecha_pedido"]?></td>
+                                    <td><a href="confirmar.php?id=<?php echo $datos_pendientes["5"]?>">Confirmar</a></td>
+                                    <td><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes["5"]?>">Cancelar</a></td>
+                                </tr>
+                            <?php 
+                            }?>
+
+                            </tbody>
+                            </table>
+                            <?php
                     }
                     ?>
 
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, nisi. Dolore minima iusto
-                    voluptatibus itaque, in mollitia rem? Earum quae laborum doloribus dolorum provident velit
-                    voluptatibus illum ipsam nihil deleniti!</p>
-                </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. A, nisi. Dolore minima iusto
-                    voluptatibus itaque, in mollitia rem? Earum quae laborum doloribus dolorum provident velit
-                    voluptatibus illum ipsam nihil deleniti!</p>
-                </div>
-            </div>
+                    </div>
 
-            </div>
-            
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" 
+                    aria-labelledby="pills-profile-tab">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam molestias repellendus quas dicta saepe est, fugiat quo officiis rem dolor praesentium accusantium odit quis, nisi odio labore recusandae vero sint.</p>
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" 
+                    aria-labelledby="pills-contact-tab">
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum vel assumenda ab excepturi nobis? Ex eos non repudiandae soluta quis facilis ratione eum iste sunt praesentium, officia enim dignissimos autem?</p>
+                    </div>
+                    
+                </div>
+
         </div>
-        
-    </div>
 
+    </div>
 </div>
