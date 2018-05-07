@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2018 a las 10:01:26
+-- Tiempo de generación: 07-05-2018 a las 13:12:40
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -31,19 +31,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `direccion` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `address` varchar(80) NOT NULL,
-  `lat` float(10,6) NOT NULL,
-  `lng` float(10,6) NOT NULL,
-  `type` varchar(30) NOT NULL
+  `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `direccion`
 --
 
-INSERT INTO `direccion` (`id`, `user_id`, `name`, `address`, `lat`, `lng`, `type`) VALUES
-(1, 2, 'Prol Av Periferico 14B', 'Nacionalizacion del Golfo de California\r\n85477 Heroica Guaymas, Son', 27.000000, 110.000000, 'domicilio');
+INSERT INTO `direccion` (`id`, `user_id`, `address`) VALUES
+(1, 2, 'Golfo de California 285\r\nNacionalizacion del Golfo de California\r\n85477 Heroica Guaymas, Son.'),
+(2, 2, 'Barca de Guaymas, 18 de Noviembre, 85470, Guaymas Sonora');
 
 -- --------------------------------------------------------
 
@@ -61,9 +58,9 @@ CREATE TABLE `envio` (
   `estado` enum('Solicitado','En camino','Entregado','Cancelado') NOT NULL DEFAULT 'Solicitado',
   `direccion_envio` int(11) NOT NULL,
   `fecha_pedido` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `fecha_en_camino` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_entregado` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  `fecha_cancelado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `fecha_en_camino` datetime NOT NULL,
+  `fecha_entregado` datetime NOT NULL,
+  `fecha_cancelado` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -71,12 +68,10 @@ CREATE TABLE `envio` (
 --
 
 INSERT INTO `envio` (`id`, `user_id`, `paquete_id`, `repartidor_id`, `pago`, `detalle`, `estado`, `direccion_envio`, `fecha_pedido`, `fecha_en_camino`, `fecha_entregado`, `fecha_cancelado`) VALUES
-(33, 2, 28, 3, '35', '10 Kilos de papas -Super  del norte', 'En camino', 1, '2018-05-06 22:47:09', '2018-05-06 22:50:25', '2018-05-06 22:50:25', '2018-05-06 22:47:09'),
-(35, 2, 30, 3, '35', 'Iphone X - Coppel', 'En camino', 1, '2018-05-06 22:51:56', '2018-05-06 22:59:39', '2018-05-06 22:59:39', '2018-05-06 22:51:56'),
-(36, 2, 31, 3, '35', 'Hamburguera - Tienda Burbano', 'En camino', 1, '2018-05-06 23:55:46', '2018-05-07 00:02:29', '2018-05-07 00:02:29', '2018-05-06 23:55:46'),
-(37, 2, 32, 3, '35', 'Pantalon dockers negro - Coppel', 'En camino', 1, '2018-05-07 00:11:47', '2018-05-07 00:12:53', '2018-05-07 00:12:53', '2018-05-07 00:11:47'),
-(38, 2, 33, 3, '35', '12 de tecate - Super Six', 'En camino', 1, '2018-05-07 00:16:51', '2018-05-07 00:17:28', '2018-05-07 00:17:28', '2018-05-07 00:16:51'),
-(39, 2, 34, NULL, '35', '', 'Cancelado', 1, '2018-05-07 00:40:56', '2018-05-07 00:54:40', '2018-05-07 00:54:40', '2018-05-07 00:54:40');
+(47, 2, 42, 3, '35', 'Boneless - Hotdog Boneless', 'Entregado', 1, '2018-05-07 02:36:34', '2018-05-07 02:37:32', '2018-05-07 02:37:57', '0000-00-00 00:00:00'),
+(48, 2, 43, 3, '35', 'Sabritas - Baja AviÃ³n', 'Entregado', 1, '2018-05-07 02:51:11', '2018-05-07 02:51:54', '2018-05-07 03:13:02', '0000-00-00 00:00:00'),
+(49, 2, 44, 3, '35', 'Balon Wilson - Wallmart', 'Entregado', 1, '2018-05-07 03:15:19', '2018-05-07 03:17:10', '2018-05-07 04:06:50', '0000-00-00 00:00:00'),
+(50, 2, 45, 3, '35', 'Tamales - DoÃ±a  Pancha', 'En camino', 1, '2018-05-07 04:06:44', '2018-05-07 04:08:51', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -95,12 +90,10 @@ CREATE TABLE `paquete` (
 --
 
 INSERT INTO `paquete` (`id`, `contenido`, `valor`) VALUES
-(28, '10 kilos de papas', '300'),
-(30, 'Iphone X', '18000'),
-(31, 'Hamburguesa del burbano', '100'),
-(32, 'Pantalon talla 34', '400'),
-(33, '12 de Tecate', '110'),
-(34, 'Guante del infinito', NULL);
+(42, 'Boneless', '80'),
+(43, 'Sabritas con Chamoy', '12'),
+(44, 'Balon Futbol Wilson', '250'),
+(45, '10 Tamales', '150');
 
 -- --------------------------------------------------------
 
@@ -176,19 +169,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `envio`
 --
 ALTER TABLE `envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
