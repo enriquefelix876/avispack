@@ -52,7 +52,13 @@ $sql5 = "select envio.id, paquete.contenido, direccion.address, envio.fecha_canc
     ORDER BY `envio`.`fecha_cancelado` DESC;";
 $query5 = $con->query($sql5);
 
+//Generación de direccion predeterminada
+$sql6 = "select address from direccion where predeterminado = 1 && user_id = \"$_SESSION[user_id]\" ";
+$query6 = $con->query($sql6);
 
+while($datos_pendientes6=$query6->fetch_array()){
+    $direccion_predeterminada = $datos_pendientes6['address'];
+}
 ?>
 
 <div class="container">
@@ -92,6 +98,14 @@ $query5 = $con->query($sql5);
                                 placeholder="Describe el producto"><small class="form-text text-muted">
                                 Trata de describir de la mejor manera el producto solicitado</small>
                             </div>
+                            
+                            <div style="padding-top:5px">
+                                <?php echo "Dirección a enviar: "."</br>";?>
+                                <?php echo $direccion_predeterminada."</br>";
+                            ?>
+                            <small class="form-text text-muted">
+                            Puedes cambiar tu dirección predeterminada en la administración de direcciones</small>
+                            </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
@@ -109,44 +123,9 @@ $query5 = $con->query($sql5);
             <div class="row" style="padding-top:15px">
                 
                 <!-- Button trigger modal -->
-                <button type="button" style="width:150px" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
-                Agregar Dirección
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel2">Agregar Dirección</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <form role="form" name="direccion"action="php/agregar_direccion.php" method="post">
-                            <div class="form-group">
-                                <label for="address">Ingrese su dirección</label>
-                                <input type="text" class="form-control" id="address" name="address" 
-                                placeholder="Ingrese su Dirección"><small class="form-text text-muted">
-                                Ingrese su dirección siguiendo el formato que se muestra</small>
-
-                                <p style="padding-top:10px">Prol Av Periferico 14B, 
-                                Nacionalización del Golfo de California, 
-                                85477 Heroica Guaymas, Son.</p>
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Agregar</button>
-                        <script src="js/valida_direccion.js"></script>
-                    </div>
-                    </form>
-                    </div>
-                </div>
-                </div>
+                <a href="direcciones.php"><button type="button" style="width:150px" class="btn btn-success" >
+                    Direcciones
+                </button></a>
 
             </div>
 

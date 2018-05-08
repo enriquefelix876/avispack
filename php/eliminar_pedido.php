@@ -20,9 +20,9 @@ if($user_id!=null){
     $query = $con->query($sql);
 		if($query!=null){
             print "<script>alert(\"El pedido ha sido eliminado\");
-            window.location='../home.php';</script></script>";
+            window.location='../home.php';</script>";
 			}else{
-                print "<script>alert(\"No tienes los permisos necesarios para eliminar este pedido!\");
+            print "<script>alert(\"No tienes los permisos necesarios para eliminar este pedido!\");
             window.location='../home.php';</script>";
             }
 

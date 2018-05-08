@@ -53,7 +53,7 @@ while($datos=$query->fetch_array()){
             <p class="h2"><?php echo $nombreCompleto?></p>
             
                 <!--Formulario-->
-                <form role="form" name="login" action="php/edit_user.php?id=<?php echo $id?>" method="post">
+                <form role="form" name="editar" action="php/edit_user.php?id=<?php echo $id?>" method="post">
                     <div class="form-group">
                         <div class="input-group mb-3" style="padding-top:20px">
                             <div class="input-group-prepend">
@@ -98,12 +98,21 @@ while($datos=$query->fetch_array()){
                                 <option value="Repartidor">Repartidor</option>
                                 <option value="Administrador">Administrador</option>
                             </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span style="width:180px" class="input-group-text">Contraseña</span>
                             </div>
+                            <input type="password" id="password" name="password" 
+                            class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
         
                         <div class="" style="padding-top:20px">
                             <a href="./info_usuario_admin.php?id=<?php echo $_GET["id"]?>"><button type="button" 
                             class="btn btn-secondary">Regresar</button></a>
                             <button style="text-align:right" type="submit" class="btn btn-primary">Modificar</button>
+                            <script src="js/valida_editar_usuario.js"></script>
                         </div>
 
                     </div>

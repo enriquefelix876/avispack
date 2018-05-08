@@ -10,17 +10,22 @@ $query = $con->query($sql);
 
 <div class="container" style="padding-top:20px; padding-bottom: 20px">
   <div class="row">
-
-    <div class="col-2">
-      <input type="text">
-    </div>
-
-    <div class="col">
-      <button type="submit">Buscar</button>
-    </div>
-
+    <form action="<?php echo $_SERVER['PHP_SELF']?>" method="GET">
+        <input type="text" id="nombre" name="nombre">
+        <button type="submit">Buscar</button>
+    </form>
   </div>
 </div>
+
+<?php 
+
+  if(isset($_GET['nombre'])){
+  $sql= "select * from user where fullname LIKE '%$_GET[nombre]%' or username LIKE '%$_GET[nombre]%'";
+  $query = $con->query($sql);
+  }
+
+?>
+
 
 <table class="table">
   <thead>
