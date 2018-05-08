@@ -85,7 +85,7 @@ $query5 = $con->query($sql5);
                     </div>
                     <div class="modal-body">
 
-                        <form action="php/confirmar_pedido.php" method="post">
+                        <form role="form" name="pedido" action="php/confirmar_pedido.php" method="post">
                             <div class="form-group">
                                 <label for="paquete">Descripción del producto a pedir</label>
                                 <input type="text" class="form-control" id="paquete" name="paquete" 
@@ -95,6 +95,7 @@ $query5 = $con->query($sql5);
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+                                <script src="js/valida_pedido.js"></script>
                             </div>
                         </form>
                     </div>
@@ -124,7 +125,7 @@ $query5 = $con->query($sql5);
                     </div>
                     <div class="modal-body">
 
-                        <form action="php/agregar_direccion.php" method="post">
+                        <form role="form" name="direccion"action="php/agregar_direccion.php" method="post">
                             <div class="form-group">
                                 <label for="address">Ingrese su dirección</label>
                                 <input type="text" class="form-control" id="address" name="address" 
@@ -140,6 +141,7 @@ $query5 = $con->query($sql5);
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Agregar</button>
+                        <script src="js/valida_direccion.js"></script>
                     </div>
                     </form>
                     </div>

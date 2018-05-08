@@ -52,7 +52,7 @@ while($datos=$query->fetch_array()){
             <p class="h2"><?php echo $_SESSION["user_fullname"]?></p>
             
                 <!--Formulario-->
-                <form role="form" name="login" action="php/edit_user_edit.php?id=
+                <form role="form" name="editar" action="php/edit_user_edit.php?id=
                 <?php echo $_SESSION["user_id"]?>" method="post">
 
                     <div class="form-group">
@@ -93,7 +93,7 @@ while($datos=$query->fetch_array()){
                             <div class="input-group-prepend">
                                 <span style="width:180px" class="input-group-text">Contraseña</span>
                             </div>
-                            <input type="password" value="<?php echo $pass?>" class="form-control"
+                            <input type="password" class="form-control"
                             id="password" name="password" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
         
@@ -102,6 +102,7 @@ while($datos=$query->fetch_array()){
                             class="btn btn-secondary">Regresar</button></a>
 
                             <button style="text-align:right" type="submit" class="btn btn-primary">Modificar</button>
+                            <script src="js/valida_editar_usuario.js"></script>
                         </div>
 
                     </div>

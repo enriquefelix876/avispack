@@ -85,7 +85,7 @@ while($datos=$query->fetch_array()){
             <div class="col-6">
                 <h4>Detalles del envio</h4>
 
-                <form name="confirmar" action="php/confirmar_pedido_repartidor.php?id=<?php echo $_GET["id"]?>" method="post">
+                <form role ="form" name="confirmar" action="php/confirmar_pedido_repartidor.php?id=<?php echo $_GET["id"]?>" method="post">
                     <div class="form-group">
                         <div class="input-group mb-3" style="padding-top:10px">
                             <div class="input-group-prepend">
@@ -105,6 +105,7 @@ while($datos=$query->fetch_array()){
                             <a href="home.php"><button type="button" 
                             class="btn btn-secondary">Regresar</button></a>
                             <button style="text-align:right" type="submit" class="btn btn-primary">Confirmar</button>
+                            <script src="js/valida_confirmacion.js"></script>
                         </div>
                     </div>
                 </form>
