@@ -6,6 +6,11 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="icon" type="image/png" href="img/icon.png" />
 	</head>
+	<style>
+        body{
+            background-image:url(img/dust_scratches.png);
+				}
+	</style>
 	<body>
 
 <!--Comienzo del header-->

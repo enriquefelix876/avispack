@@ -27,6 +27,12 @@ $query7 = $con->query($sql7);
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Direcciones</title>
     <link rel="icon" type="image/png" href="img/icon.png"/>
+
+    <style>
+        body{
+            background-image:url(img/dust_scratches.png);
+        }
+    </style>
 </head>
 <body>
     <!--Encabezado-->
@@ -121,6 +127,8 @@ $query7 = $con->query($sql7);
             </div>
 
             <div class="col-6"> 
+
+
                 <div class="row">
                     <iframe
                         width="500"
@@ -133,6 +141,8 @@ $query7 = $con->query($sql7);
                 <div class="row">
                     <?php echo $direccion_predeterminada ?>
                 </div>
+                
+                
             </div>
 
         </div>

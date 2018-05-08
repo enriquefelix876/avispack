@@ -173,6 +173,7 @@ while($datos_pendientes6=$query6->fetch_array()){
     if($id==null){
         echo "</br>";
         echo "<center><img src=\"img/empty_envio.png\"></center>";
+        echo "</br>";
         echo "<center>Actualmente no tienes pedidos pendientes</center>";
 
     }else{
@@ -220,6 +221,7 @@ while($datos_pendientes6=$query6->fetch_array()){
         if($id3==null){
             echo "</br>";
             echo "<center><img src=\"img/empty_envio.png\"></center>";
+            echo "</br>";
             echo "<center>Actualmente no tienes pedidos en camino</center>";
         }else{
         ?>
@@ -266,6 +268,7 @@ while($datos_pendientes6=$query6->fetch_array()){
     if($id4==null){
         echo "</br>";
         echo "<center><img src=\"img/empty_envio.png\"></center>";
+        echo "</br>";
         echo "<center>No le han entregado ningún pedido</center>";
     }else{
     ?>
@@ -311,6 +314,7 @@ while($datos_pendientes6=$query6->fetch_array()){
     if($id5==null){
         echo "</br>";
         echo "<center><img src=\"img/empty_envio.png\"></center>";
+        echo "</br>";
         echo "<center>No tienes ningún pedido cancelado</center>";
     }else{
     ?>
