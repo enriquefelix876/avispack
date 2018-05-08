@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2018 a las 13:12:40
+-- Tiempo de generación: 08-05-2018 a las 13:38:12
 -- Versión del servidor: 10.1.30-MariaDB
 -- Versión de PHP: 7.2.2
 
@@ -31,16 +31,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `direccion` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `address` varchar(100) NOT NULL
+  `address` varchar(100) NOT NULL,
+  `predeterminado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `direccion`
 --
 
-INSERT INTO `direccion` (`id`, `user_id`, `address`) VALUES
-(1, 2, 'Golfo de California 285\r\nNacionalizacion del Golfo de California\r\n85477 Heroica Guaymas, Son.'),
-(2, 2, 'Barca de Guaymas, 18 de Noviembre, 85470, Guaymas Sonora');
+INSERT INTO `direccion` (`id`, `user_id`, `address`, `predeterminado`) VALUES
+(1, 2, 'Golfo de California 285\r\nNacionalizacion del Golfo de California\r\n85477 Heroica Guaymas, Son.', 1),
+(2, 2, 'Barca de Guaymas, 18 de Noviembre, 85470, Guaymas Sonora', 0);
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,12 @@ INSERT INTO `envio` (`id`, `user_id`, `paquete_id`, `repartidor_id`, `pago`, `de
 (47, 2, 42, 3, '35', 'Boneless - Hotdog Boneless', 'Entregado', 1, '2018-05-07 02:36:34', '2018-05-07 02:37:32', '2018-05-07 02:37:57', '0000-00-00 00:00:00'),
 (48, 2, 43, 3, '35', 'Sabritas - Baja AviÃ³n', 'Entregado', 1, '2018-05-07 02:51:11', '2018-05-07 02:51:54', '2018-05-07 03:13:02', '0000-00-00 00:00:00'),
 (49, 2, 44, 3, '35', 'Balon Wilson - Wallmart', 'Entregado', 1, '2018-05-07 03:15:19', '2018-05-07 03:17:10', '2018-05-07 04:06:50', '0000-00-00 00:00:00'),
-(50, 2, 45, 3, '35', 'Tamales - DoÃ±a  Pancha', 'En camino', 1, '2018-05-07 04:06:44', '2018-05-07 04:08:51', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(50, 2, 45, 3, '35', 'Tamales - DoÃ±a  Pancha', 'Entregado', 1, '2018-05-07 04:06:44', '2018-05-07 04:08:51', '2018-05-07 14:05:05', '0000-00-00 00:00:00'),
+(51, 2, 46, 3, '35', 'Paquete de CDS - Farmacia Leon', 'Entregado', 1, '2018-05-07 13:56:22', '2018-05-07 13:58:08', '2018-05-07 14:00:02', '0000-00-00 00:00:00'),
+(52, 2, 47, 3, '35', 'Muy rica', 'Entregado', 1, '2018-05-07 14:00:28', '2018-05-07 14:00:59', '2018-05-07 14:01:38', '0000-00-00 00:00:00'),
+(53, 2, 48, 3, '35', 'mucho', 'En camino', 1, '2018-05-07 20:02:51', '2018-05-07 20:04:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(54, 2, 49, 3, '35', 'Crema Lubriderm - Woolworth', 'En camino', 1, '2018-05-07 20:05:16', '2018-05-07 20:05:56', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(55, 2, 50, 3, '35', 'Soda de 3 Litros-OXXO', 'En camino', 1, '2018-05-07 20:07:51', '2018-05-07 20:08:42', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -93,7 +99,12 @@ INSERT INTO `paquete` (`id`, `contenido`, `valor`) VALUES
 (42, 'Boneless', '80'),
 (43, 'Sabritas con Chamoy', '12'),
 (44, 'Balon Futbol Wilson', '250'),
-(45, '10 Tamales', '150');
+(45, '10 Tamales', '150'),
+(46, 'Paquete de CDS', '99'),
+(47, 'Putas', '500'),
+(48, 'Celular del oxxo', '500'),
+(49, 'Crema Lubriderm', '80'),
+(50, 'Soda de 3 Litros', '35');
 
 -- --------------------------------------------------------
 
@@ -117,16 +128,16 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `fullname`, `username`, `email`, `password`, `rol`, `phonenumber`, `created_at`) VALUES
-(1, 'Enrique Felix', 'enriquefelix876', 'enriquefelix876@gmail.com', 'admin', 'Administrador', '6221643493', '2018-03-15 17:14:51'),
-(2, 'Sebastian Carmona', 'sebas', 'sebasmasmas@hotmail.com', 'sebas', 'Miembro', '6221556038', '2018-03-19 15:00:47'),
-(3, 'Rosca Vela', 'roscavela', 'roscavela@gmail.com', 'roscavela', 'Repartidor', '6221449836', '2018-04-11 09:36:13'),
-(5, 'Ignacio Libre', 'nacholibre', 'nacho_wwe@gmail.com', 'nacholibre', 'Administrador', '6221264582', '2018-04-23 21:03:53'),
+(1, 'Enrique Felix', 'enriquefelix876', 'enriquefelix876@gmail.com', '$2y$10$Y6CE5KC0.COSxMnALTEpR.lDCOZYVbfG/57xc6udQpd.e6g6yt2H6', 'Administrador', '6221643493', '2018-03-15 17:14:51'),
+(2, 'Sebastian Carmona', 'sebas', 'sebasmasmas@hotmail.com', '$2y$10$exDL3XAltSJt1q6pczfkbuuAj5ZI2FKDGY6rap7mkTvmm3fhEoBme', 'Miembro', '6221556038', '2018-03-19 15:00:47'),
+(3, 'Rosca Vela', 'roscavela', 'roscavela@gmail.com', '$2y$10$6nbfH/hItjfJYiKyft9/EerK5TsVUHpRy05Xqxu7Pfye4sXAdipDW', 'Repartidor', '6221449836', '2018-04-11 09:36:13'),
+(5, 'Ignacio Libre', 'nacholibre', 'nacho_wwe@gmail.com', '$2y$10$nv9YcWQ2HfXRIbLGewSZEerLCTb1MO3dqWdaUOHk5GM0QD0QBU.2W', 'Miembro', '6221264582', '2018-04-23 21:03:53'),
 (6, 'Alonso Gomez', 'Alongshoot', 'alngsht@hotmail.com', '$2y$10$fRtSJBLktIx6PD7dUaWBsuHOp8V9Kr0/Lmh/fzk9cquh8XO2PWVlO', 'Miembro', '6221207038', '2018-04-23 21:07:59'),
 (8, 'Tobey Maguire', 'tobias', 'tobey@gmail.com', '$2y$10$5eIrNk291KQ2ZyX4BFC6seTjQExyq3Gim/02nwuzw3SbSGDh43Q7a', 'Repartidor', '6225791048', '2018-04-23 23:35:31'),
 (10, 'Carlos Carballo', 'carballo', 'carballo@gmail.com', '$2y$10$2q6KBdjmmgKIP6ib6EHOpOm69HUlNf7tFRiDPBv4KhyVHmfidxbgK', 'Repartidor', '6221739331', '2018-04-24 09:20:43'),
-(11, 'sebas loco', 'sebas', 'sebas@hotmail.com', '$2y$10$di.41JoPPmLrCevhs3.sy.cQmkHwgxXc4R40KuAxMOvsiHC6l0ZW.', 'Miembro', '6221204560', '2018-04-24 09:21:53'),
+(11, 'sebas loco', 'sebasloco', 'sebas@hotmail.com', '$2y$10$di.41JoPPmLrCevhs3.sy.cQmkHwgxXc4R40KuAxMOvsiHC6l0ZW.', 'Miembro', '6221204560', '2018-04-24 09:21:53'),
 (13, 'Chino Vela', 'chino', 'chino@gmail.com', '$2y$10$ejBGPhLdOMnjvKqc8YVGle9KVjVpMrpPN5hYMKHUA9OIonW755/eG', 'Miembro', '6221091678', '2018-04-24 10:17:30'),
-(14, 'Edwin Rios', 'edwin', 'edwin@gmail.com', '$2y$10$sKjNHzHWt1JuUPthj0vQZuj2wvwJ8NE3ZcBIimwgMduC0bDTnJj.y', 'Administrador', '6221214524', '2018-04-24 10:47:23');
+(14, 'Edwin Rios', 'edwin', 'edwin@gmail.com', '$2y$10$X/EniU33ZQ3FrpNb3JifwOLlNRQFBOVMCguys9mqY6Av.UpNeu22u', 'Administrador', '6221214524', '2018-04-24 10:47:23');
 
 --
 -- Índices para tablas volcadas
@@ -169,19 +180,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `envio`
 --
 ALTER TABLE `envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `paquete`
 --
 ALTER TABLE `paquete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
