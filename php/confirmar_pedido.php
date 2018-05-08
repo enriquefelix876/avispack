@@ -30,12 +30,17 @@ while($datos=$query->fetch_array()){
         $id_resultado = mysqli_fetch_array($resultado, MYSQLI_ASSOC);
         $id_paquete = $id_resultado['id'];
         
+        $sql4 = "select id from direccion where user_id = \"$_SESSION[user_id]\" && predeterminado = 1";
+        $query4 = $con->query($sql4);
+        while($datos4=$query4->fetch_array()){
+            $direccion_predeterminada = $datos4["id"];
 
+            }
 
 	if(isset($_POST["paquete"]) ){
 			
 		$sql2 = "insert into envio(user_id,paquete_id,pago,direccion_envio,fecha_pedido) value 
-        (\"$id_usuario\",\"$id_paquete\",35,1,NOW())";
+        (\"$id_usuario\",\"$id_paquete\",35,\"$direccion_predeterminada\",NOW())";
         
 		$query2 = $con->query($sql2);
 		if($query!=null){

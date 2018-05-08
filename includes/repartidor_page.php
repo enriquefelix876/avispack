@@ -93,7 +93,9 @@ $query4 = $con->query($sql4);
                     $id2 = $id_resultado2['contenido'];
 
                     if($id2==null){
-                    echo "<p>Actualmente no hay pedidos pendientes</p>";
+                        echo "</br>";
+                        echo "<center><img src=\"img/empty_envio.png\"></center>";
+                        echo "<center>No hay pedidos pendientes</center>";
                     }else{
                     ?>
 
@@ -145,7 +147,9 @@ $query4 = $con->query($sql4);
                         $id3 = $id_resultado3['contenido'];
 
                         if($id3==null){
-                        echo "<p>No tienes pedidos en camino</p>";
+                            echo "</br>";
+                            echo "<center><img src=\"img/empty_envio.png\"></center>";
+                            echo "<center>No tienes pedidos en camino</center>";
                         }else{
                         ?>
                             <table class="table table-bordered">
@@ -196,7 +200,9 @@ $query4 = $con->query($sql4);
                         $id4 = $id_resultado4['detalle'];
 
                         if($id4==null){
-                        echo "<p>No haz entregado ningún producto</p>";
+                            echo "</br>";
+                            echo "<center><img src=\"img/empty_envio.png\"></center>";
+                            echo "<center>No has entregado ningún producto";
                         }else{
                         ?>
                             <table class="table table-bordered">

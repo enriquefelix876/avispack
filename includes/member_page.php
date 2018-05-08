@@ -171,7 +171,10 @@ while($datos_pendientes6=$query6->fetch_array()){
         $id = $id_resultado['contenido'];
 
     if($id==null){
-        echo "<p>Actualmente no tienes pedidos pendientes</p>";
+        echo "</br>";
+        echo "<center><img src=\"img/empty_envio.png\"></center>";
+        echo "<center>Actualmente no tienes pedidos pendientes</center>";
+
     }else{
         ?>
     <table class="table" id="example" class="table table-striped table-bordered" style="width:100%">
@@ -215,7 +218,9 @@ while($datos_pendientes6=$query6->fetch_array()){
         $id3 = $id_resultado3['contenido'];
 
         if($id3==null){
-        echo "<p>Actualmente no tienes ningún pedido en camino</p>";
+            echo "</br>";
+            echo "<center><img src=\"img/empty_envio.png\"></center>";
+            echo "<center>Actualmente no tienes pedidos en camino</center>";
         }else{
         ?>
   <table class="table">
@@ -259,7 +264,9 @@ while($datos_pendientes6=$query6->fetch_array()){
     $id4 = $id_resultado4['contenido'];
 
     if($id4==null){
-    echo "<p>Actualmente no le han entregado ningún pedido</p>";
+        echo "</br>";
+        echo "<center><img src=\"img/empty_envio.png\"></center>";
+        echo "<center>No le han entregado ningún pedido</center>";
     }else{
     ?>
     <table class="table">
@@ -302,7 +309,9 @@ while($datos_pendientes6=$query6->fetch_array()){
     $id5 = $id_resultado5['contenido'];
 
     if($id5==null){
-    echo "<p>No tiene ningún pedido cancelado</p>";
+        echo "</br>";
+        echo "<center><img src=\"img/empty_envio.png\"></center>";
+        echo "<center>No tienes ningún pedido cancelado</center>";
     }else{
     ?>
     <table class="table">
