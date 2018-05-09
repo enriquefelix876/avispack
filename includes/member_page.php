@@ -99,6 +99,7 @@ while($datos_pendientes6=$query6->fetch_array()){
                                 Trata de describir de la mejor manera el producto solicitado</small>
                             </div>
                             
+                            <?php if(isset($direccion_predeterminada)):?>
                             <div style="padding-top:5px">
                                 <?php echo "Dirección a enviar: "."</br>";?>
                                 <?php echo $direccion_predeterminada."</br>";
@@ -111,6 +112,13 @@ while($datos_pendientes6=$query6->fetch_array()){
                                 <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
                                 <script src="js/valida_pedido.js"></script>
                             </div>
+
+                            <?php else:?>
+                            <p>No tiene ninguna dirección a enviar asignada a la cuenta. Vaya al administrador de 
+                            direcciones para agregarla</p>
+
+                            <?php endif;?>
+
                         </form>
                     </div>
                             

@@ -5,6 +5,10 @@ if(!isset($_SESSION["user_id"]) || $_SESSION["user_id"]==null || $_SESSION["user
 }
 include "php/conexion.php";
 
+//Generación de todas las direcciones
+$sql5 = "select address from direccion where user_id = \"$_SESSION[user_id]\" ";
+$query5 = $con->query($sql5);
+
 //Generación de direccion predeterminada
 $sql6 = "select address from direccion where predeterminado = 1 && user_id = \"$_SESSION[user_id]\" ";
 $query6 = $con->query($sql6);
@@ -13,7 +17,7 @@ while($datos_pendientes6=$query6->fetch_array()){
     $direccion_predeterminada = $datos_pendientes6['address'];
 }
 
-//Generación de direcciones
+//Generación de otras direcciones 
 $sql7 = "select id, address from direccion where predeterminado = 0 && user_id = \"$_SESSION[user_id]\"";
 $query7 = $con->query($sql7);
 ?>
@@ -52,12 +56,22 @@ $query7 = $con->query($sql7);
         <div class="row">
 
             <div class="col-6">
+                <?php
+                $resultado3 = mysqli_query($con, $sql7) or die (mysqli_error($con));
 
+                //Se comprueba si hay registros en camino
+                $id_resultado3 = mysqli_fetch_array($resultado3, MYSQLI_ASSOC);
+
+                $otrosEnvios = $id_resultado3['contenido'];
+                ?>
+                
+                <?php if($otrosEnvios!=null):?>
                 <table class="table">
                     <thead>
                         <tr>
                         <th class="table-primary" scope="col">Dirección</th>
                         <th class="table-primary" scope="col">predeterminada</th>
+                        <th class="table-primary" scope="col">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,8 +86,9 @@ $query7 = $con->query($sql7);
                                     <td><?php echo $datos["address"]?></td>
                                     <td><a href="php/establecer_predeterminada.php?id=<?php echo $datos["id"]?>">
                                     Establecer como Determinada</a></td>
+                                    <td><a href="php/eliminar_direccion.php?id=<?php echo $datos["id"]?>">
+                                    Eliminar Dirección</a></td>
                                 </tr>
-
                                 </tbody>
                                 <?php
                                 }
@@ -82,7 +97,11 @@ $query7 = $con->query($sql7);
                         </tr>
                     </tbody>
                 </table>
-                
+
+                <?php else:?>
+                <p>Aún no has agregado direcciones alternativas</p>
+                            <?php endif;?>
+
                 <div class="" style="padding-top:10px">
                     <a href="home.php"><button type="button" class="btn btn-secondary">Regresar</button></a>
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
@@ -126,10 +145,10 @@ $query7 = $con->query($sql7);
 
             </div>
 
-            <div class="col-6"> 
+            <div class="col-6 text-center"> 
 
-
-                <div class="row">
+                <?php if(isset($direccion_predeterminada)):?>
+                <div class="row ">
                     <iframe
                         width="500"
                         height="280"
@@ -141,7 +160,16 @@ $query7 = $con->query($sql7);
                 <div class="row">
                     <?php echo $direccion_predeterminada ?>
                 </div>
-                
+
+                <?php else:?>
+                <div class="row">
+                    <img src="img/empty_location.png" alt="">
+                </div>
+                <div class="row">
+                    <p>Agrega una dirección para poder mostrar</p>
+                </div>
+
+                <?php endif;?>
                 
             </div>
 
