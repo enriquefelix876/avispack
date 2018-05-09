@@ -16,11 +16,16 @@ if(!empty($_POST)){
 			//Encriptar
 			$pass_encrypt = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
+			//Protección Inyección SQL
+			$username = mysqli_real_escape_string($con, trim($_POST['username']));
+			$fullname = mysqli_real_escape_string($con, trim($_POST['fullname']));
+			$email = mysqli_real_escape_string($con, trim($_POST['email']));
+
 			if($found){
 				print "<script>alert(\"Nombre de usuario o email ya estan registrados.\");window.location='../registro.php';</script>";
 			}
 			$sql = "insert into user(username,fullname,email,password,created_at) value 
-			(\"$_POST[username]\",\"$_POST[fullname]\",\"$_POST[email]\",\"$pass_encrypt\",NOW())";
+			(\"$username\",\"$fullname\",\"$email\",\"$pass_encrypt\",NOW())";
 			$query = $con->query($sql);
 			if($query!=null){
 				print "<script>alert(\"Registro exitoso. Proceda a logearse\");window.location='../index.php';</script>";

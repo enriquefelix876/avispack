@@ -4,8 +4,12 @@ if(!empty($_POST)){
 		if($_POST["username"]!=""&&$_POST["password"]!=""){
 			include "conexion.php";
 			
+			//Evitar inyección SQL
+			$username = mysqli_real_escape_string($con, trim($_POST['username']));
+			$password = mysqli_real_escape_string($con, trim($_POST['password']));
+
 			$user_id=null;
-            $sql1= "select * from user where (username=\"$_POST[username]\" or email=\"$_POST[username]\")";
+            $sql1= "select * from user where (username=\"$username\" or email=\"$username\")";
 			$query = $con->query($sql1);
 			while ($r=$query->fetch_array()) {
 				$user_id=$r["id"];

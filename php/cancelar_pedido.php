@@ -6,7 +6,7 @@ include "conexion.php";
 //con un repartidor
 $user_id=null;
 $comprobacion = "select id from envio where id = \"$_GET[id]\" && 
-(user_id = \"$_SESSION[user_id]\" or \"$_SESSION[user_rol]\"='Repartidor') && estado = 'Solicitado'";
+(user_id = \"$_SESSION[user_id]\" or \"$_SESSION[user_rol]\"='Repartidor') && (estado = 'Solicitado' or estado = 'En Camino')";
 $comprobar = $con->query($comprobacion);
 
 while ($r=$comprobar->fetch_array()) {

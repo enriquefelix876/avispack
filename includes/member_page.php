@@ -17,15 +17,15 @@ while($datos=$query->fetch_array()){
 }
 
 //Generación de pedidos pendientes
-$sql2 = "select envio.id, paquete.contenido, direccion.address, envio.pago, envio.fecha_pedido 
+$sql2 = "select envio.id, paquete.contenido, direccion.address, envio.pago, envio.fecha_pedido
     FROM (( envio 
     INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'Solicitado') 
     INNER JOIN direccion ON envio.direccion_envio = direccion.id) 
     ORDER BY `envio`.`fecha_pedido` DESC";
 $query2 = $con->query($sql2);
 
-//Generación de pedidos pendientes
-$sql3 = "select paquete.contenido, direccion.address, envio.pago, user.fullname, envio.fecha_pedido, envio.fecha_en_camino, paquete.valor
+//Generación de pedidos en camino
+$sql3 = "select paquete.contenido, direccion.address, envio.pago, user.fullname, envio.fecha_pedido, envio.fecha_en_camino, paquete.valor, envio.detalle
     FROM((( envio 
     INNER JOIN paquete ON envio.paquete_id = paquete.id && envio.user_id = \"$_SESSION[user_id]\" && envio.estado = 'En camino') 
     INNER JOIN direccion ON envio.direccion_envio = direccion.id)
@@ -159,7 +159,7 @@ while($datos_pendientes6=$query6->fetch_array()){
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" 
-    role="tab" aria-controls="pills-contact" aria-selected="false">Entregados</a>
+    role="tab" aria-controls="pills-contact" aria-selected="false">Recibidos</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-cancelado-tab" data-toggle="pill" href="#pills-cancelado" 
@@ -239,6 +239,7 @@ while($datos_pendientes6=$query6->fetch_array()){
                         <th style="width:250px" class="table-primary" scope="row">Descripción</th>
                         <th style="width:250px" class="table-primary" scope="row">Dirección</th>
                         <th style="width:250px" class="table-primary" scope="row">Costo</th>
+                        <th style="width:250px" class="table-primary" scope="row">Comision</th>
                         <th style="width:250px" class="table-primary" scope="row">En camino desde</th>
                         <th style="width:250px" class="table-primary" scope="row">Repartidor</th>
                     </tr>
@@ -246,9 +247,10 @@ while($datos_pendientes6=$query6->fetch_array()){
                     <?php
                         while($datos_pendientes3=$query3->fetch_array()){
                         ?>
-                        <td class="table-secondary"><?php echo $datos_pendientes3['contenido']?></td>
+                        <td class="table-secondary"><?php echo $datos_pendientes3['detalle']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['address']?></td>
                         <td class="table-secondary"><?php echo "$".$datos_pendientes3['valor']?></td>
+                        <td class="table-secondary"><?php echo "$".$datos_pendientes3['pago']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['fecha_en_camino']?></td>
                         <td class="table-secondary"><?php echo $datos_pendientes3['fullname']?></td>
                         </tr>

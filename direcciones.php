@@ -62,7 +62,7 @@ $query7 = $con->query($sql7);
                 //Se comprueba si hay registros en camino
                 $id_resultado3 = mysqli_fetch_array($resultado3, MYSQLI_ASSOC);
 
-                $otrosEnvios = $id_resultado3['contenido'];
+                $otrosEnvios = $id_resultado3['id'];
                 ?>
                 
                 <?php if($otrosEnvios!=null):?>

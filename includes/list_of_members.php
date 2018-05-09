@@ -26,6 +26,19 @@ $query = $con->query($sql);
 
 ?>
 
+<!--Si la busqueda arroja resultados -->
+<?php
+$resultado3 = mysqli_query($con, $sql) or die (mysqli_error($con));
+
+//Se comprueba si hay registros en camino
+$id_resultado3 = mysqli_fetch_array($resultado3, MYSQLI_ASSOC);
+$id = $id_resultado3['id'];
+
+if($id==null){
+    echo "</br>";
+    echo "<img src=\"img/result-not-found-1.png\">";
+}else{
+?>
 
 <table class="table">
   <thead>
@@ -60,4 +73,9 @@ $query = $con->query($sql);
     <?php
     }
     ?>
+    
 </table>
+<?php
+}?>
+
+  <a href="includes/reporte_usuarios.php" target="_blank"><img src="img/pdf.png" alt=""></a>

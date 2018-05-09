@@ -161,6 +161,7 @@ $query4 = $con->query($sql4);
                                         <th scope="col">Costo</th>
                                         <th scope="col">En camino desde</th>
                                         <th scope="col">Entregar</th>
+                                        <th scope="col">Cancelar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -174,6 +175,7 @@ $query4 = $con->query($sql4);
                                         <td><?php echo $datos_pendientes3["valor"]?></td>
                                         <td><?php echo $datos_pendientes3["fecha_en_camino"]?></td>
                                         <td><a href="php/entregar_pedido.php?id=<?php echo $datos_pendientes3["4"]?>">Entregar</a></td>
+                                        <td><a href="php/cancelar_pedido.php?id=<?php echo $datos_pendientes3["4"]?>">Cancelar</a></td>
                                     </tr>
                                 <?php 
                                 }?>
